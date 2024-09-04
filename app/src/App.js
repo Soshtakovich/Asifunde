@@ -1,14 +1,12 @@
-
 import './App.css';
+import Container from './Appcontainer';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
 
-        <p>
-          Zakes
-        </p>
+        <Container/>
 
       </header>
     </div>
