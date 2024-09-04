@@ -16,7 +16,7 @@ function Sidebar({ setContent, isSidebarClosed, toggleSidebar }) {
 
   const handleItemClick = (itemName) => {
     setActiveItem(itemName);
-    setContent(itemName);
+    setContent(itemName); // Pass the selected item name to the parent
   };
 
   return (
