@@ -1,15 +1,16 @@
 import React from 'react';
 import '../CSS/Maincontent.css';
 import Path from './small-components/Path';
+import Dashboard from './components/Dashboard';
 
-function Maincontent({ content }) {
+function Maincontent({ content, isSidebarClosed }) {
     // Define which component to render based on the content prop
     const renderContent = () => {
         switch (content) {
             case "Subjects":
                 return <div>Subjects Content</div>;
             case "Dashboard":
-                return <div>Dashboard Content</div>;
+                return <Dashboard />;
             case "Assessments":
                 return <div>Assessments Content</div>;
             case "Progress":
@@ -26,9 +27,20 @@ function Maincontent({ content }) {
     };
 
     return (
-        <div className="main-content">
-            <Path content={content} />
-            {renderContent()}
+        <div className={`main-content ${isSidebarClosed ? 'small' : ''}`}>
+            <div className='content-main'>
+                <div className='Path'>
+                   <Path content={content} />
+                </div>
+
+                    <div className='top-border-main-content'>
+                        
+                    </div>
+
+                <div className='clicked-content'>
+                   {renderContent()}
+                </div>
+            </div>
         </div>
     );
 }

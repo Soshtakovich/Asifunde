@@ -1,0 +1,117 @@
+@import url('../../CSS/variables.css');
+@import url('../../CSS/Sidebar.css');
+
+.assessment-related {
+    font-family: Arial, sans-serif;
+}
+
+.assessments-all, .results-summary {
+    margin: 20px;
+    
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.header h3 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.icons {
+    display: flex;
+    gap: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    font-weight: bold;
+
+}
+
+.subject-info {
+    display: flex;
+    align-items: center;
+}
+
+.subject-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.status-Completed {
+    background-color: #4CAF50;
+}
+
+.status .Not_Started {
+    background-color: #FFB74D;
+}
+
+.status-Incomplete {
+    background-color: var(--incomplete);
+    color: #fff;
+}
+
+.status-Completed, .status-Incomplete {
+    font-weight: bold;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+    padding : 5px 5px;
+}
+
+.days-remaining {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+}
+
+.results-list {
+    list-style: none;
+    padding: 0;
+}
+
+.results-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.results-title {
+    display: flex;
+    align-items: center;
+}
+
+.results-title i {
+    font-size: 24px;
+    margin-right: 10px;
+}

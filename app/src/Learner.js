@@ -18,7 +18,7 @@ function Learner() {
         setContent={setSelectedContent} 
         isSidebarClosed={isSidebarClosed} 
       />
-      <Maincontent content={selectedContent} />
+      <Maincontent content={selectedContent} isSidebarClosed={isSidebarClosed} />
     </div>
   );
 }

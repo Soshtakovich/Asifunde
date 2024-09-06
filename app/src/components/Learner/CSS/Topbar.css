@@ -5,10 +5,6 @@
     --spacebetween: 60px;
 }
 
-.navbar {
-  left: var(--navbar-left); /* Shift navbar to the right by the sidebar width */
-  width: var(--navbar-width); /* Adjust width to account for the space */
-}
 
 .navbar {
   display: flex;

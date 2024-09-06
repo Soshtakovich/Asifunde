@@ -1,0 +1,39 @@
+@import url('../variables.css');
+@import url('../Sidebar.css');
+
+
+
+/* PATH */
+
+.breadcrumb {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+.breadcrumb li {
+    display: inline;
+    margin-right: 8px; /* Adjust spacing as needed */
+}
+
+.breadcrumb li a {
+    text-decoration: none;
+    color: var(--dark); /* Change to your preferred link color */
+}
+
+.breadcrumb li a.active {
+    font-weight: bold;
+    color: var(--dark); /* Change to your preferred active color */
+}
+
+.breadcrumb li::after {
+    content: '/';
+    margin-left: 8px;
+}
+
+.breadcrumb li:last-child::after {
+    content: ''; /* Remove the last separator */
+}
+

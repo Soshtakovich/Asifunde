@@ -14,6 +14,8 @@
     --success: #388E3C;
     --successs: #e3eee3;
     --light-success: #BBF7D0;
+    --incomplete : red;
+
 }
 
 *{

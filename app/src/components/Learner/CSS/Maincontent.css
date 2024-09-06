@@ -2,96 +2,106 @@
 @import url('Sidebar.css');
 
 :root {
-    --spacebetween: 60px;
-}
-
-.navbar {
-  left: var(--navbar-left); /* Shift navbar to the right by the sidebar width */
-  width: var(--navbar-width); /* Adjust width to account for the space */
-}
-
-.navbar {
-  display: flex;
-  justify-content: center; /* Center the content within the navbar */
-  align-items: center;
-  background: var(--light);
-  color: var(--grey);
-  padding: 10px 20px;
-  color: var(--light);
-
-  position: fixed; /* Make navbar fixed */
-  top: 0;
-  left: var(--sidebar-width); /* Shift navbar to the right by the sidebar width */
-  width: calc(100% - var(--sidebar-width)); /* Adjust width to account for the space */
-  z-index: 1000;
-
-
-}
-
-.navbar-content {
-  display: flex;
-  justify-content: space-between; /* Spread items evenly */
-  align-items: center;
-  width: 100%; /* Make sure the content takes full width */
-}
-
-.search-toggle, .theme-toggle, .menu-toggle {
-  background: none;
-  border: none;
-  color: var(--dark);
-  font-size: 24px;
-  cursor: pointer;
-}  
-
-.search-form {
-  display: flex;
-  align-items: center;
-}
-
-.search-form input[type="search"] {
-  padding: 5px;
-  border: 1px solid var(--dark-grey);
-  border-radius: 4px;
-}
-
-.notification {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.notification .notification-count {
-  background-color: var(--danger);
-  color: var(--light);
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  font-size: 12px;
-}
-
-.profile img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+    --main-left: var(--sidebar-width);
+    --main-width: calc(97% - var(--sidebar-width));
 }
 
 /* Dark mode styles */
-body.dark .navbar {
+body.dark .main-content {
   background: var(--light);
 }
 
-.navbar.small {
-  left: var(--sidebar-width-small); /* Adjust when sidebar is small */
-  width: calc(100% - var(--sidebar-width-small));
+.main-content {
+  position: fixed; /* Make the main content fixed like the Topbar */
+  top: 100px; /* Adjust for the height of the Topbar */
+  left: var(--main-left); /* Shift to the right by the sidebar width */
+  width: var(--main-width); /* Adjust width to account for the sidebar width */
+  height: 80vh; /* Full height minus Topbar height */
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--grey);
+  color: var(--dark);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  padding: 16px;
+  text-align: center;
 }
-/* When sidebar is closed */
-.sidebar.close + .navbar {
-  left: var(--sidebar-width-small); /* Shift navbar to the right by the small sidebar width */
-  width: calc(100% - var(--sidebar-width-small)); /* Adjust width to account for the space */
+
+body.dark .main-content {
+  background: var(--grey);
+}
+.content-main {
+    position: relative; /* Set position relative for absolute positioning inside */
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Path positioning */
+  .Path {
+    position: absolute; /* Position the path absolutely inside the parent */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    padding: 0 50px; /* Optional: Add some padding if needed */
+  }
+  
+  .path-left h1{
+    margin-left: -45%;
+    margin-bottom: 5px;
+ }
+
+
+ .top-border-main-content
+ {
+    border-top: 2px solid var(--dark);
+
+    margin-top: 7%; /* Adjust margin to accommodate the path */
+    padding: 16px;
+    width: 100%;
+ }
+  /* Styling for the clicked content */
+  .clicked-content {
+    margin-top: 0.000000001%; /* Adjust margin to accommodate the path */
+    padding: 0.0001px;
+    width: 100%;
+    overflow: auto;
+  }
+
+
+
+
+  @media (max-width: 768px)
+  {
+    .top-border-main-content
+    {
+       border-top: 2px solid var(--dark);
+       margin-top: 20%; /* Adjust margin to accommodate the path */
+
+       width: 100%;
+    }
+
+    .path-left ul{
+        display: none;
+     }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Adjust when sidebar is small or closed */
+.main-content.small {
+  left: var(--sidebar-width-small); /* Adjust left position for small sidebar */
+  width: calc(97% - var(--sidebar-width-small)); /* Adjust width for small sidebar */
 }

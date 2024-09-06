@@ -1,19 +1,19 @@
-
+import '../../CSS/Main-small-components-css/Path.css'
 
 function Path({ content }) {
 
     return (
   
-            <div class="header">
-                <div class="left">
+            <div class="path-content-header">
+                <div class="path-left">
                     <h1>{content}</h1>
-                    <ul class="breadcrumb">
-                        <li><a href="/">
-                                Asifunde
-                            </a></li>
-                        /
-                        <li><a href="/" class="active">{content}</a></li>
-                    </ul>
+                    
+                        <ul className="breadcrumb">
+                            <li><a href="/">Asifunde</a></li>
+                            
+                            <li><a href="/" className="active">{content}</a></li>
+                        </ul>
+
                 </div>
             </div>
 
