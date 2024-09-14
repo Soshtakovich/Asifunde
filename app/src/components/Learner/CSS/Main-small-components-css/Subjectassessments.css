@@ -1,0 +1,118 @@
+@import url('../../CSS/variables.css');
+@import url('../../CSS/Sidebar.css');
+
+.modern-assessment-container {
+    font-family: Arial, sans-serif;
+}
+
+.modern-assessments-table {
+    margin: 20px;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    overflow-x: auto; /* For mobile responsiveness */
+}
+
+.modern-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.modern-header h3 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.modern-icons {
+    display: flex;
+    gap: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow-x: auto;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+td {
+    white-space: nowrap;
+}
+
+.subject-info {
+    display: flex;
+    align-items: center;
+}
+
+.subject-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.download-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.download-link:hover {
+    text-decoration: underline;
+}
+
+.days-remaining {
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.days-remaining.overdue {
+    background-color: #FF6347;
+    color: white;
+}
+
+.modern-submit-btn {
+    padding: 8px 15px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modern-submit-btn:disabled {
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .modern-assessment-container {
+        padding: 10px;
+    }
+
+    th, td {
+        padding: 10px;
+        font-size: 10px;
+    }
+
+    .modern-header h3 {
+        font-size: 15px;
+    }
+
+    .modern-submit-btn {
+        padding: 6px 10px;
+    }
+}

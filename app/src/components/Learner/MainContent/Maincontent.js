@@ -2,13 +2,14 @@ import React from 'react';
 import '../CSS/Maincontent.css';
 import Path from './small-components/Path';
 import Dashboard from './components/Dashboard';
+import Subjetcts from './components/Subjects';
 
 function Maincontent({ content, isSidebarClosed }) {
     // Define which component to render based on the content prop
     const renderContent = () => {
         switch (content) {
             case "Subjects":
-                return <div>Subjects Content</div>;
+                return <Subjetcts/>;
             case "Dashboard":
                 return <Dashboard />;
             case "Assessments":

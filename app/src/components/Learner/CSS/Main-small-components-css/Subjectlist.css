@@ -1,0 +1,59 @@
+@import url('../../CSS/variables.css');
+@import url('../../CSS/Sidebar.css');
+
+.subject-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-gap: 24px;
+    margin-top: 36px;
+}
+
+.subject-list li {
+    padding: 24px;
+    background: var(--light);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    grid-gap: 24px;
+    cursor: pointer;
+}
+
+.subject-list li .bx {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    font-size: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.subject-list li:nth-child(1) .bx {
+    background: var(--light-primary);
+    color: var(--primary);
+}
+
+.subject-list li:nth-child(2) .bx {
+    background: var(--light-warning);
+    color: var(--warning);
+}
+
+.subject-list li:nth-child(3) .bx {
+    background: var(--light-success);
+    color: var(--success);
+}
+
+.subject-list li:nth-child(4) .bx {
+    background: var(--light-danger);
+    color: var(--danger);
+}
+
+.subject-list li .subject-info h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.subject-list li .subject-info p {
+    color: var(--dark);
+}
