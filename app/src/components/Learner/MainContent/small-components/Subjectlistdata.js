@@ -1,28 +1,29 @@
-import React, { useState } from 'react';
-import Displaysubjectassessments from '../components/Subjects/subjectassessments';  // Import the assessments component
+//import React, { useState } from 'react';
+import React from 'react';
+
 
 const subjectData = [
     {
         iconClass: 'bx bx-math',
-        value: 'Mathematics',
+        Name: 'Mathematics',
         label: 'Absent',
         link: '/' // The link is now used to trigger the modal
     },
     {
         iconClass: 'bx bxl-sketch',
-        value: 'Physical Sciences',
+        Name: 'Physical Sciences',
         label: 'Assessments completed',
         link: '/'
     },
     {
         iconClass: 'bx bxs-doughnut-chart',
-        value: 'BET',
+        Name: 'BET',
         label: 'Average',
         link: '/'
     },
     {
         iconClass: 'bx bx-laptop',
-        value: 'Computer Skills',
+        Name: 'Computer Skills',
         label: 'Program Score',
         link: '/'
     }
@@ -36,7 +37,7 @@ function SubjectList({ subjectData, onSubjectClick }) {
                     <li key={index} onClick={() => onSubjectClick(subject)}>
                         <i className={subject.iconClass}></i>
                         <span className="subject-info">
-                            <h3 className='subject-heading'>{subject.value}</h3>
+                            <h3 className='subject-heading'>{subject.Name}</h3>
                         </span>
                     </li>
                 ))}
@@ -45,30 +46,10 @@ function SubjectList({ subjectData, onSubjectClick }) {
     );
 }
 
-function Subjectslistdata() {
-    const [showModal, setShowModal] = useState(false);
-
-    const handleSubjectClick = (subject) => {
-        setShowModal(true);
-    };
-
-    const closeModal = () => {
-        setShowModal(false);
-    };
-
+function Subjectslistdata({ onSubjectSelect }) {
     return (
         <div>
-            <SubjectList subjectData={subjectData} onSubjectClick={handleSubjectClick} />
-
-            {/* Modal popup */}
-            {showModal && (
-                <div className="modal-overlay">
-                    <div className="modal-content">
-                        <button className="close-modal-btn" onClick={closeModal}>X</button>
-                        <Displaysubjectassessments /> {/* Display the assessments inside the modal */}
-                    </div>
-                </div>
-            )}
+            <SubjectList subjectData={subjectData} onSubjectClick={onSubjectSelect} />
         </div>
     );
 }

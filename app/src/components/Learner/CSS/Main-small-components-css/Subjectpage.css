@@ -1,0 +1,66 @@
+@import url('../../CSS/variables.css');
+@import url('../../CSS/Sidebar.css');
+
+.subject-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .block-container {
+    width: 95%;
+    margin: 10px 0;
+  }
+  
+  .block {
+    text-align: center;
+    padding: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .dropdown {
+    
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 5px;
+  }
+  
+  .dropdown-item h3 {
+    margin: 5px 0;
+  }
+  
+  .dropdown-item p {
+    margin: 0;
+  }
+  
+
+  .back-button-wrapper {
+    width: 100%; /* Makes the wrapper take full width */
+    display: flex; /* Use flexbox to align the button */
+    justify-content: flex-start; /* Align the button to the left */
+    margin-left: 2.5%;
+  }
+  
+  .Subject-Back {
+    padding: 10px 20px;   /* Larger padding for a bigger button */
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    border-radius: 20px;  /* Curved corners */
+    cursor: pointer;
+    font-size: 7pt;      /* Larger font size */
+    font-weight: bold;    /* Bold text */
+    transition: background-color 0.3s;
+  }
+  
+  .Subject-Back:hover {
+    background-color: #459da0; /* Darker green on hover */
+  }
+  
+  
+
+  

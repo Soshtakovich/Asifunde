@@ -4,7 +4,7 @@ export const subjectassessmentsData = [
         subject: "Mathematics",
         description: "Algebra and Geometry test",
         fileLink: "/files/mathematics-test.pdf",
-        dueDate: "2023-09-15",
+        dueDate: "2024-11-15",
         totalMark: 100,
         mark: 85,
         status: "Completed"
@@ -13,7 +13,7 @@ export const subjectassessmentsData = [
         subject: "Physical Sciences",
         description: "Physics and Chemistry exam",
         fileLink: "/files/physics-test.pdf",
-        dueDate: "2023-09-20",
+        dueDate: "2024-09-20",
         totalMark: 100,
         mark: 75,
         status: "Not Started"
@@ -40,7 +40,7 @@ export const subjectassessmentsData = [
         subject: "BET",
         description: "Introduction to Business Management",
         fileLink: "/files/bet-assignment.pdf",
-        dueDate: "2023-09-30",
+        dueDate: "2024-11-15",
         totalMark: 80,
         mark: 65,
         status: "Incomplete"

@@ -1,16 +1,41 @@
-import React from 'react';
-import '../../CSS/Main-small-components-css/Subjectlist.css';
-import Subjectslistdata from '../small-components/Subjectlistdata'; 
+import React, { useState } from 'react';
+import Subjectslistdata from '../small-components/Subjectlistdata';
 import Displayassessments from '../small-components/Assessmentsall';
-import '../../CSS/Main-small-components-css/Dash.css'
+import Subjectpage from './Subjects/subjectcontent'; // Import Subjectpage
+import '../../CSS/Main-small-components-css/Subjectlist.css';
+import '../../CSS/Main-small-components-css/Dash.css';
 
+function Subjects({ onUpdatePath }) {
+    const [selectedSubject, setSelectedSubject] = useState(null);
+    const back_butt = "<< Back to Subjects";
 
-function Subjects() {
+    const handleSubjectSelect = (subject) => {
+        setSelectedSubject(subject); // Set the subject when selected
+        onUpdatePath(`Subjects/${subject.Name}`); // Update the path
+    };
+
+    const handleBackClick = () => {
+        setSelectedSubject(null); // Reset the selected subject to go back to the list
+        onUpdatePath("Subjects"); // Update the path to "Subjects"
+    };
+
     return (
-        <>
-            <Subjectslistdata />
-            <Displayassessments/>
-        </>
+        <div>
+            {/* Conditionally render either the subject list or the subject page */}
+            {selectedSubject ? (
+                <div>
+                    <div className="back-button-wrapper">
+                        <button onClick={handleBackClick} className="Subject-Back">{back_butt}</button>
+                    </div>
+                    <Subjectpage subject={selectedSubject} /> {/* Pass the selected subject to Subjectpage */}
+                </div>
+            ) : (
+                <>
+                    <Subjectslistdata onSubjectSelect={handleSubjectSelect} />
+                    <Displayassessments />
+                </>
+            )}
+        </div>
     );
 }
 
