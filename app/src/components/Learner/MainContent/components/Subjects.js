@@ -5,18 +5,18 @@ import Subjectpage from './Subjects/subjectcontent'; // Import Subjectpage
 import '../../CSS/Main-small-components-css/Subjectlist.css';
 import '../../CSS/Main-small-components-css/Dash.css';
 
-function Subjects({ onUpdatePath }) {
+function Subjects() {
     const [selectedSubject, setSelectedSubject] = useState(null);
     const back_butt = "<< Back to Subjects";
 
     const handleSubjectSelect = (subject) => {
         setSelectedSubject(subject); // Set the subject when selected
-        onUpdatePath(`Subjects/${subject.Name}`); // Update the path
+        // Update the path
     };
 
     const handleBackClick = () => {
         setSelectedSubject(null); // Reset the selected subject to go back to the list
-        onUpdatePath("Subjects"); // Update the path to "Subjects"
+       // Update the path to "Subjects"
     };
 
     return (

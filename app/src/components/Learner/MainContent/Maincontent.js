@@ -1,21 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../CSS/Maincontent.css';
 import Path from './small-components/Path';
 import Dashboard from './components/Dashboard';
 import Subjects from './components/Subjects';
 
 function Maincontent({ content, isSidebarClosed }) {
-    const [path, setPath] = useState(content); // State to manage the path
-
-    const updatePath = (newPath) => {
-        setPath(newPath);
-    };
 
     // Define which component to render based on the content prop
     const renderContent = () => {
         switch (content) {
             case "Subjects":
-                return <Subjects onUpdatePath={updatePath} />; // Pass updatePath to Subjects
+                return <Subjects  />; // Pass updatePath to Subjects
             case "Dashboard":
                 return <Dashboard />;
             case "Assessments":
@@ -37,7 +32,7 @@ function Maincontent({ content, isSidebarClosed }) {
         <div className={`main-content ${isSidebarClosed ? 'small' : ''}`}>
             <div className='content-main'>
                 <div className='Path'>
-                    <Path content={path} /> {/* Pass the current path */}
+                    <Path content={content} /> {/* Pass the current path */}
                 </div>
 
                 <div className='top-border-main-content'>
