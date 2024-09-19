@@ -3,7 +3,8 @@ import  './Appcontainer.css';
 import Teacher from './Teacher';
 import Learner from './Learner';
 
-const userRole = 'Learner';
+//const userRole = 'Learner';
+const userRole = 'Teacher';
 
 //{userRole === 'Learner' ? <Learner /> : <Teacher />}
 
