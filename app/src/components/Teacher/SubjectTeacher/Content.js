@@ -2,18 +2,44 @@ import React, { useState } from 'react';
 import '../CSS/Content.css';
 
 const SubjectContent = () => {
-  const [topics, setTopics] = useState([
-    {
-      name: "Topic 1",
-      subtopics: [{ name: "Subtopic 1.1", notes: null, worksheet: null }],
-      isOpen: false,
-    },
-    {
-      name: "Topic 2",
-      subtopics: [{ name: "Subtopic 2.1", notes: null, worksheet: null }],
-      isOpen: false,
-    },
-  ]);
+    const [topics, setTopics] = useState([
+        {
+          name: "Topic 1",
+          subtopics: [
+            { name: "Subtopic 1.1", notes: null, worksheet: null },
+            { name: "Subtopic 1.2", notes: null, worksheet: null },
+            { name: "Subtopic 1.3", notes: null, worksheet: null },
+          ],
+          isOpen: false,
+        },
+        {
+          name: "Topic 2",
+          subtopics: [
+            { name: "Subtopic 2.1", notes: null, worksheet: null },
+            { name: "Subtopic 2.2", notes: null, worksheet: null },
+            { name: "Subtopic 2.3", notes: null, worksheet: null },
+          ],
+          isOpen: false,
+        },
+        {
+          name: "Topic 3",
+          subtopics: [
+            { name: "Subtopic 3.1", notes: null, worksheet: null },
+            { name: "Subtopic 3.2", notes: null, worksheet: null },
+            { name: "Subtopic 3.3", notes: null, worksheet: null },
+          ],
+          isOpen: false,
+        },
+        {
+          name: "Topic 4",
+          subtopics: [
+            { name: "Subtopic 4.1", notes: null, worksheet: null },
+            { name: "Subtopic 4.2", notes: null, worksheet: null },
+            { name: "Subtopic 4.3", notes: null, worksheet: null },
+          ],
+          isOpen: false,
+        },
+      ]);
 
   const [showTopicPopup, setShowTopicPopup] = useState(false);
   const [newTopic, setNewTopic] = useState({ name: "", subtopic: "", notes: null, worksheet: null });
