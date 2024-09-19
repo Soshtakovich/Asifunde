@@ -3,6 +3,8 @@ import '../CSS/Maincontent.css';
 import Path from './small-components/Path';
 import Dashboard from './components/Dashboard';
 import Subjects from './components/Subjects';
+import Assessments from './components/Assessments';
+import LearnerProgress from './components/Progress';
 
 function Maincontent({ content, isSidebarClosed }) {
 
@@ -14,9 +16,9 @@ function Maincontent({ content, isSidebarClosed }) {
             case "Dashboard":
                 return <Dashboard />;
             case "Assessments":
-                return <div>Assessments Content</div>;
+                return <Assessments/>;
             case "Progress":
-                return <div>Progress Content</div>;
+                return <LearnerProgress/>;
             case "Groups":
                 return <div>Groups Content</div>;
             case "Notifications":

@@ -1,0 +1,145 @@
+@import url('variables.css');
+@import url('Sidebar.css');
+
+/* General Container */
+.progress-item-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  gap: 20px; /* Optional: Adds space between the two sections */
+}
+
+/* Progress Section - 80% width */
+.progress-item-section {
+  flex-basis: 60%;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Leaderboard Section - 20% width */
+.progress-item-leaderboard-section {
+  flex-basis: 40%;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 500px; /* Set a fixed height for the leaderboard */
+  overflow-y: auto; /* Enable vertical scroll if content overflows */
+  width: 200px; /* Fixed width for the leaderboard */
+  box-sizing: border-box; /* Ensures padding is included in the total width and height */
+}
+
+/* Headers */
+.progress-item-header-main {
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.progress-item-header-sub {
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+}
+
+.progress-item-header-section {
+  font-family: 'Arial', sans-serif;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+/* Tables */
+.progress-item-table {
+  width: 100%;
+  border-collapse: separate;  /* Allows curved corners */
+  border-spacing: 0;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.progress-item-table th, 
+.progress-item-table td {
+  padding: 8px;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.progress-item-table th {
+  background-color: #ffdd80; /* Light yellow color */
+  color: #333;
+}
+
+.progress-item-table td {
+  background-color: #fff;
+  color: #333;
+}
+
+.progress-item-table tbody tr:nth-child(even) td {
+  background-color: #f0f8ff; /* Light blue */
+}
+
+/* Add rounded corners for specific parts of the table */
+.progress-item-table th:first-child {
+  border-top-left-radius: 8px;
+}
+
+.progress-item-table th:last-child {
+  border-top-right-radius: 8px;
+}
+
+.progress-item-table tr:last-child td:first-child {
+  border-bottom-left-radius: 8px;
+}
+
+.progress-item-table tr:last-child td:last-child {
+  border-bottom-right-radius: 8px;
+}
+
+/* Leaderboard Table */
+.progress-item-leaderboard-table {
+  margin-top: 20px;
+  width: 100%; /* Make it fill the width of the leaderboard section */
+}
+
+.progress-item-leaderboard-table th {
+  background-color: #4CAF50; /* Green header */
+  color: white;
+}
+
+.progress-item-leaderboard-table td {
+  color: #333;
+}
+
+.progress-item-leaderboard-table tbody tr:nth-child(even) td {
+  background-color: #f9f9f9; /* Light grey for alternating rows */
+}
+
+/* Hover effect on rows */
+.progress-item-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+
+/* Highlight the current learner's row */
+.progress-item-highlight-row {
+  background-color: #ffcccc !important; /* Light red background */
+  color: #b30000; /* Darker red text */
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .progress-item-container {
+    flex-direction: column;
+  }
+
+  .progress-item-section,
+  .progress-item-leaderboard-section {
+    width: 100%;
+    margin-bottom: 20px;
+    flex-basis: 100%;
+  }
+}
