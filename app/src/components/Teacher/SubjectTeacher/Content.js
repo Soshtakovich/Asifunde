@@ -104,10 +104,15 @@ const SubjectContent = () => {
             {topic.isOpen && (
               <div className="subtopics-list">
                 {topic.subtopics.map((subtopic, subIndex) => (
-                  <div key={subIndex} className="subtopic-item">
-                    {subtopic.name}
-                    {subtopic.notes && <div>Notes: {subtopic.notes.name}</div>}
-                    {subtopic.worksheet && <div>Worksheet: {subtopic.worksheet.name}</div>}
+                    <div key={subIndex} className="subtopic-item">
+                    {subtopic.name} -&nbsp;
+                    <a href={subtopic.notes} target="_blank" rel="noopener noreferrer">
+                      Notes
+                    </a>
+                    &nbsp;|&nbsp;
+                    <a href={subtopic.worksheet} target="_blank" rel="noopener noreferrer">
+                      Worksheet
+                    </a>
                   </div>
                 ))}
               </div>
