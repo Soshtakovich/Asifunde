@@ -1,0 +1,25 @@
+@import url('../../css/variables.css');
+@import url('../../css/Sidebar.css');
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .dynamic-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+  }
+  
+  .dynamic-table th, .dynamic-table td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .dynamic-table th {
+    font-weight: bold;
+
+  }
+  
