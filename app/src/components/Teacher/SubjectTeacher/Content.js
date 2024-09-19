@@ -1,45 +1,46 @@
 import React, { useState } from 'react';
 import '../CSS/Content.css';
+import AddTopicPopup from './Addtopic'; // Import the new component
 
 const SubjectContent = () => {
-    const [topics, setTopics] = useState([
-        {
-          name: "Topic 1",
-          subtopics: [
-            { name: "Subtopic 1.1", notes: null, worksheet: null },
-            { name: "Subtopic 1.2", notes: null, worksheet: null },
-            { name: "Subtopic 1.3", notes: null, worksheet: null },
-          ],
-          isOpen: false,
-        },
-        {
-          name: "Topic 2",
-          subtopics: [
-            { name: "Subtopic 2.1", notes: null, worksheet: null },
-            { name: "Subtopic 2.2", notes: null, worksheet: null },
-            { name: "Subtopic 2.3", notes: null, worksheet: null },
-          ],
-          isOpen: false,
-        },
-        {
-          name: "Topic 3",
-          subtopics: [
-            { name: "Subtopic 3.1", notes: null, worksheet: null },
-            { name: "Subtopic 3.2", notes: null, worksheet: null },
-            { name: "Subtopic 3.3", notes: null, worksheet: null },
-          ],
-          isOpen: false,
-        },
-        {
-          name: "Topic 4",
-          subtopics: [
-            { name: "Subtopic 4.1", notes: null, worksheet: null },
-            { name: "Subtopic 4.2", notes: null, worksheet: null },
-            { name: "Subtopic 4.3", notes: null, worksheet: null },
-          ],
-          isOpen: false,
-        },
-      ]);
+  const [topics, setTopics] = useState([
+    {
+      name: "Topic 1",
+      subtopics: [
+        { name: "Subtopic 1.1", notes: null, worksheet: null },
+        { name: "Subtopic 1.2", notes: null, worksheet: null },
+        { name: "Subtopic 1.3", notes: null, worksheet: null },
+      ],
+      isOpen: false,
+    },
+    {
+      name: "Topic 2",
+      subtopics: [
+        { name: "Subtopic 2.1", notes: null, worksheet: null },
+        { name: "Subtopic 2.2", notes: null, worksheet: null },
+        { name: "Subtopic 2.3", notes: null, worksheet: null },
+      ],
+      isOpen: false,
+    },
+    {
+      name: "Topic 3",
+      subtopics: [
+        { name: "Subtopic 3.1", notes: null, worksheet: null },
+        { name: "Subtopic 3.2", notes: null, worksheet: null },
+        { name: "Subtopic 3.3", notes: null, worksheet: null },
+      ],
+      isOpen: false,
+    },
+    {
+      name: "Topic 4",
+      subtopics: [
+        { name: "Subtopic 4.1", notes: null, worksheet: null },
+        { name: "Subtopic 4.2", notes: null, worksheet: null },
+        { name: "Subtopic 4.3", notes: null, worksheet: null },
+      ],
+      isOpen: false,
+    },
+  ]);
 
   const [showTopicPopup, setShowTopicPopup] = useState(false);
   const [newTopic, setNewTopic] = useState({ name: "", subtopic: "", notes: null, worksheet: null });
@@ -57,7 +58,7 @@ const SubjectContent = () => {
     );
   };
 
-  // Function to add a new topic with a subtopic, notes, and worksheet
+  // Function to add a new topic
   const addNewTopic = (e) => {
     e.preventDefault();
     const newTopicData = {
@@ -69,7 +70,7 @@ const SubjectContent = () => {
     setShowTopicPopup(false); // Close the popup after adding
   };
 
-  // Function to add a new subtopic to a topic
+  // Function to add a new subtopic to a topic (untouched as requested)
   const addNewSubtopic = (e) => {
     e.preventDefault();
     const updatedTopics = [...topics];
@@ -85,28 +86,7 @@ const SubjectContent = () => {
 
       {/* Add Topic Popup */}
       {showTopicPopup && (
-        <div className="popup-form">
-          <form onSubmit={addNewTopic}>
-            <label>
-              Topic Name:
-              <input type="text" value={newTopic.name} onChange={(e) => setNewTopic({ ...newTopic, name: e.target.value })} required />
-            </label>
-            <label>
-              Subtopic Name:
-              <input type="text" value={newTopic.subtopic} onChange={(e) => setNewTopic({ ...newTopic, subtopic: e.target.value })} required />
-            </label>
-            <label>
-              Upload Notes:
-              <input type="file" onChange={(e) => setNewTopic({ ...newTopic, notes: e.target.files[0] })} />
-            </label>
-            <label>
-              Upload Worksheet:
-              <input type="file" onChange={(e) => setNewTopic({ ...newTopic, worksheet: e.target.files[0] })} />
-            </label>
-            <button type="submit">Add Topic</button>
-            <button type="button" onClick={() => setShowTopicPopup(false)}>Cancel</button>
-          </form>
-        </div>
+        <AddTopicPopup newTopic={newTopic} setNewTopic={setNewTopic} addNewTopic={addNewTopic}  setShowTopicPopup={setShowTopicPopup}/>
       )}
 
       {/* Topic List */}
@@ -130,7 +110,7 @@ const SubjectContent = () => {
             {topic.isOpen && (
               <div className="subtopics-list">
                 {topic.subtopics.map((subtopic, subIndex) => (
-                    <div key={subIndex} className="subtopic-item">
+                  <div key={subIndex} className="subtopic-item">
                     {subtopic.name} -&nbsp;
                     <a href={subtopic.notes} target="_blank" rel="noopener noreferrer">
                       Notes
@@ -147,7 +127,7 @@ const SubjectContent = () => {
         ))}
       </div>
 
-      {/* Add Subtopic Popup */}
+      {/* Add Subtopic Popup (left untouched as requested) */}
       {showSubtopicPopup && (
         <div className="popup-form">
           <form onSubmit={addNewSubtopic}>
