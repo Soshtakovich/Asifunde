@@ -3,57 +3,64 @@ import React, { useState } from 'react';
 import '../CSS/Content.css';
 
 const SubjectContent = () => {
-  const [topics, setTopics] = useState([]);
-  const [newTopic, setNewTopic] = useState({ name: "", subtopics: [], notes: null, worksheet: null });
-  const [newSubtopic, setNewSubtopic] = useState({ name: "", notes: null, worksheet: null });
-  const [isTopicModalOpen, setIsTopicModalOpen] = useState(false);
-  const [isSubtopicModalOpen, setIsSubtopicModalOpen] = useState(false);
-  const [currentTopicIndex, setCurrentTopicIndex] = useState(null);
+  const [topics, setTopics] = useState([
+    {
+      name: "Topic 1",
+      subtopics: ["Subtopic 1.1", "Subtopic 1.2"],
+      isOpen: false,
+    },
+    {
+      name: "Topic 2",
+      subtopics: ["Subtopic 2.1", "Subtopic 2.2"],
+      isOpen: false,
+    },
+    {
+        name: "Topic 3",
+        subtopics: ["Subtopic 2.1", "Subtopic 2.2"],
+        isOpen: false,
+      },
+  ]);
 
-  const handleTopicSubmit = () => {
-    if (newTopic.name && newSubtopic.name) {
-      setTopics([...topics, { ...newTopic, subtopics: [{ ...newSubtopic }] }]);
-      setNewTopic({ name: "", subtopics: [], notes: null, worksheet: null });
-      setNewSubtopic({ name: "", notes: null, worksheet: null });
-      setIsTopicModalOpen(false);
-    }
+  // Function to toggle the dropdown for a topic
+  const toggleTopic = (index) => {
+    setTopics(
+      topics.map((topic, i) =>
+        i === index ? { ...topic, isOpen: !topic.isOpen } : topic
+      )
+    );
   };
 
-  const handleSubtopicSubmit = () => {
-    if (newSubtopic.name) {
+  // Function to add a new subtopic to a topic
+  const addSubtopic = (index) => {
+    const newSubtopic = prompt("Enter new subtopic name:");
+    if (newSubtopic) {
       const updatedTopics = [...topics];
-      updatedTopics[currentTopicIndex].subtopics.push({ ...newSubtopic });
+      updatedTopics[index].subtopics.push(newSubtopic);
       setTopics(updatedTopics);
-      setNewSubtopic({ name: "", notes: null, worksheet: null });
-      setIsSubtopicModalOpen(false);
     }
   };
 
   return (
     <div className="subject-content-container">
-      {/* Add Topic Button */}
-      <button onClick={() => setIsTopicModalOpen(true)} className="add-topic-btn">
-        Add Topic
-      </button>
-
-      {/* Topics List */}
       <div className="topics-list">
-        {topics.map((topic, topicIndex) => (
-          <div className="topic-item" key={topicIndex}>
-            <div className="topic-header" onClick={() => setCurrentTopicIndex(topicIndex)}>
-              <span className="topic-name">{topic.name}</span>
-              <button onClick={() => setIsSubtopicModalOpen(true)} className="add-subtopic-btn">
-                Add Subtopic
+        {topics.map((topic, index) => (
+          <div key={index} className="topic-item">
+            <div className="topic-header">
+              <span className="topic-name" onClick={() => toggleTopic(index)}>
+                {topic.name}
+              </span>
+              <button
+                className="add-subtopic-btn"
+                onClick={() => addSubtopic(index)}
+              >
+                + Add Subtopic
               </button>
             </div>
-            <hr className="topic-divider" />
-            {topicIndex === currentTopicIndex && (
+            {topic.isOpen && (
               <div className="subtopics-list">
                 {topic.subtopics.map((subtopic, subIndex) => (
-                  <div className="subtopic-item" key={subIndex}>
-                    <strong>{subtopic.name}</strong>
-                    <p>Notes: {subtopic.notes ? subtopic.notes.name : "No notes uploaded"}</p>
-                    <p>Worksheet: {subtopic.worksheet ? subtopic.worksheet.name : "No worksheet uploaded"}</p>
+                  <div key={subIndex} className="subtopic-item">
+                    {subtopic}
                   </div>
                 ))}
               </div>
@@ -61,73 +68,8 @@ const SubjectContent = () => {
           </div>
         ))}
       </div>
-
-      {/* Topic Modal */}
-      {isTopicModalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <h3>Add New Topic</h3>
-            <label>Topic Name:</label>
-            <input
-              type="text"
-              value={newTopic.name}
-              onChange={(e) => setNewTopic({ ...newTopic, name: e.target.value })}
-            />
-            <label>Subtopic Name:</label>
-            <input
-              type="text"
-              value={newSubtopic.name}
-              onChange={(e) => setNewSubtopic({ ...newSubtopic, name: e.target.value })}
-            />
-            <label>Upload Notes:</label>
-            <input
-              type="file"
-              onChange={(e) => setNewTopic({ ...newTopic, notes: e.target.files[0] })}
-            />
-            <label>Upload Worksheet:</label>
-            <input
-              type="file"
-              onChange={(e) => setNewTopic({ ...newTopic, worksheet: e.target.files[0] })}
-            />
-            <div className="modal-buttons">
-              <button onClick={handleTopicSubmit}>Submit</button>
-              <button onClick={() => setIsTopicModalOpen(false)}>Cancel</button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Subtopic Modal */}
-      {isSubtopicModalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <h3>Add New Subtopic</h3>
-            <label>Subtopic Name:</label>
-            <input
-              type="text"
-              value={newSubtopic.name}
-              onChange={(e) => setNewSubtopic({ ...newSubtopic, name: e.target.value })}
-            />
-            <label>Upload Notes:</label>
-            <input
-              type="file"
-              onChange={(e) => setNewSubtopic({ ...newSubtopic, notes: e.target.files[0] })}
-            />
-            <label>Upload Worksheet:</label>
-            <input
-              type="file"
-              onChange={(e) => setNewSubtopic({ ...newSubtopic, worksheet: e.target.files[0] })}
-            />
-            <div className="modal-buttons">
-              <button onClick={handleSubtopicSubmit}>Submit</button>
-              <button onClick={() => setIsSubtopicModalOpen(false)}>Cancel</button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
 
 export default SubjectContent;
-
