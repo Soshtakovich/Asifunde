@@ -1,11 +1,12 @@
 //import React, { useState } from 'react';
 import React from 'react';
+import '../../CSS/Main-small-components-css/Dash.css'
 
 const subjectData = [
     {
         iconClass: 'bx bx-book-content',
         Name: 'Add Assessment',
-        label: 'Absent',
+        label: 'Add a Test or Assignment',
         link: '/' // The link is now used to trigger the modal
     },
     {
@@ -37,7 +38,9 @@ function SubjectList({ subjectData, onSubjectClick }) {
                         <i className={subject.iconClass}></i>
                         <span className="subject-info">
                             <h3 className='subject-heading'>{subject.Name}</h3>
+                            <p className='dash-script'>{subject.label}</p>
                         </span>
+                        
                     </li>
                 ))}
             </ul>

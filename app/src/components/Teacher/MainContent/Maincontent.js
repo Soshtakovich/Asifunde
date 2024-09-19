@@ -3,6 +3,7 @@ import '../CSS/Maincontent.css';
 import Path from './small-components/Path';
 import Dashboard from './components/Dashboard';
 import Assessments from './components/Assessments';
+import SubjectContent from '../SubjectTeacher/Content';
 
 
 function Maincontent({ content, isSidebarClosed }) {
@@ -10,8 +11,8 @@ function Maincontent({ content, isSidebarClosed }) {
     // Define which component to render based on the content prop
     const renderContent = () => {
         switch (content) {
-            case "Subjects":
-                return <div>Notifications Content</div>;
+            case "Content":
+                return <SubjectContent/>
             case "Dashboard":
                 return <Dashboard />;
             case "Assessments":

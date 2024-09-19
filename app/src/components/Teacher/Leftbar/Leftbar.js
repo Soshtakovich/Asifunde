@@ -6,11 +6,12 @@ function Sidebar({ setContent, isSidebarClosed, toggleSidebar }) {
 
   const menuItems = [
     { name: "Dashboard", icon: "bxs-dashboard" },
-    { name: "Subjects", icon: "bxs-school" },
+    { name: "Content", icon: "bxs-school" },
     { name: "Assessments", icon: "bx-analyse" },
     { name: "Progress", icon: "bx-run" },
-    //{ name: "Groups", icon: "bx-group" },
-   // { name: "Notifications", icon: "bxs-bell-ring" },
+    { name: "Submissions", icon: "bx bxl-graphql" },
+    { name: "Class List", icon: "bx bx-list-ol" },
+    { name: "Announcements", icon: "bxs-bell-ring" },
     //{ name: "Settings", icon: "bx-cog" }
   ];
 
