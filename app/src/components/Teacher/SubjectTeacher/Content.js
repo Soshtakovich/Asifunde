@@ -15,8 +15,12 @@ const SubjectContent = () => {
     },
   ]);
 
-  const [showPopup, setShowPopup] = useState(false);
+  const [showTopicPopup, setShowTopicPopup] = useState(false);
   const [newTopic, setNewTopic] = useState({ name: "", subtopic: "", notes: null, worksheet: null });
+
+  const [showSubtopicPopup, setShowSubtopicPopup] = useState(false);
+  const [selectedTopicIndex, setSelectedTopicIndex] = useState(null);
+  const [newSubtopic, setNewSubtopic] = useState({ name: "", notes: null, worksheet: null });
 
   // Function to toggle the dropdown for a topic
   const toggleTopic = (index) => {
@@ -36,26 +40,25 @@ const SubjectContent = () => {
       isOpen: false,
     };
     setTopics([...topics, newTopicData]);
-    setShowPopup(false); // Close the popup after adding
+    setShowTopicPopup(false); // Close the popup after adding
   };
 
   // Function to add a new subtopic to a topic
-  const addSubtopic = (index) => {
-    const subtopicName = prompt("Enter new subtopic name:");
-    const notes = prompt("Upload Notes:"); // In a real app, you'd use a file input
-    const worksheet = prompt("Upload Worksheet:"); // In a real app, you'd use a file input
-    if (subtopicName) {
-      const updatedTopics = [...topics];
-      updatedTopics[index].subtopics.push({ name: subtopicName, notes, worksheet });
-      setTopics(updatedTopics);
-    }
+  const addNewSubtopic = (e) => {
+    e.preventDefault();
+    const updatedTopics = [...topics];
+    updatedTopics[selectedTopicIndex].subtopics.push({ name: newSubtopic.name, notes: newSubtopic.notes, worksheet: newSubtopic.worksheet });
+    setTopics(updatedTopics);
+    setShowSubtopicPopup(false); // Close the popup after adding
   };
 
   return (
     <div className="subject-content-container">
-      <button className="add-topic-btn" onClick={() => setShowPopup(true)}>+ Add Topic</button>
+      {/* Add Topic Button */}
+      <button className="add-topic-btn" onClick={() => setShowTopicPopup(true)}>+ Add Topic</button>
 
-      {showPopup && (
+      {/* Add Topic Popup */}
+      {showTopicPopup && (
         <div className="popup-form">
           <form onSubmit={addNewTopic}>
             <label>
@@ -75,11 +78,12 @@ const SubjectContent = () => {
               <input type="file" onChange={(e) => setNewTopic({ ...newTopic, worksheet: e.target.files[0] })} />
             </label>
             <button type="submit">Add Topic</button>
-            <button type="button" onClick={() => setShowPopup(false)}>Cancel</button>
+            <button type="button" onClick={() => setShowTopicPopup(false)}>Cancel</button>
           </form>
         </div>
       )}
 
+      {/* Topic List */}
       <div className="topics-list">
         {topics.map((topic, index) => (
           <div key={index} className="topic-item">
@@ -87,7 +91,15 @@ const SubjectContent = () => {
               <span className="topic-name" onClick={() => toggleTopic(index)}>
                 {topic.name}
               </span>
-              <button className="add-subtopic-btn" onClick={() => addSubtopic(index)}>+ Add Subtopic</button>
+              <button
+                className="add-subtopic-btn"
+                onClick={() => {
+                  setSelectedTopicIndex(index);
+                  setShowSubtopicPopup(true);
+                }}
+              >
+                + Add Subtopic
+              </button>
             </div>
             {topic.isOpen && (
               <div className="subtopics-list">
@@ -103,6 +115,33 @@ const SubjectContent = () => {
           </div>
         ))}
       </div>
+
+      {/* Add Subtopic Popup */}
+      {showSubtopicPopup && (
+        <div className="popup-form">
+          <form onSubmit={addNewSubtopic}>
+            <label>
+              Subtopic Name:
+              <input
+                type="text"
+                value={newSubtopic.name}
+                onChange={(e) => setNewSubtopic({ ...newSubtopic, name: e.target.value })}
+                required
+              />
+            </label>
+            <label>
+              Upload Notes:
+              <input type="file" onChange={(e) => setNewSubtopic({ ...newSubtopic, notes: e.target.files[0] })} />
+            </label>
+            <label>
+              Upload Worksheet:
+              <input type="file" onChange={(e) => setNewSubtopic({ ...newSubtopic, worksheet: e.target.files[0] })} />
+            </label>
+            <button type="submit">Add Subtopic</button>
+            <button type="button" onClick={() => setShowSubtopicPopup(false)}>Cancel</button>
+          </form>
+        </div>
+      )}
     </div>
   );
 };

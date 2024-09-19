@@ -52,7 +52,7 @@
   }
   
   .add-topic-btn:hover {
-    background-color: #0069D9;
+    background-color: #4CAF50;
   }
   
   .add-subtopic-btn {
@@ -65,7 +65,7 @@
   }
   
   .add-subtopic-btn:hover {
-    background-color: #45a049;
+    background-color: #007BFF;
   }
   
   .subtopics-list {
@@ -85,7 +85,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
+    background-color: var(--light);
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -95,6 +95,7 @@
   .popup-form label {
     display: block;
     margin-bottom: 10px;
+    font-weight: bolder;
   }
   
   .popup-form input {
