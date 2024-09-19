@@ -1,21 +1,18 @@
-// src/LearnerData.js
-
 const LearnerData = {
     name: "Zakes Matsimbe",
     learnerNumber: "BET25-451236",
     grade: 8,
+    position: 3,  // This is the overall class position, previously called `inClassPosition`
+
     academics: [
-      { subject: "Mathematics", assessments: [34, 67, 78, 98, 99] },
-      { subject: "Physical Sciences", assessments: [77, 75, 45, 79, 89] },
-      { subject: "BET", assessments: [45, 56, 34, 89, 98] },
-      { subject: "Computer Skills", assessments: [78, 75, 89, 75, 78] },
+      { subject: "Mathematics", assessments: [34, 67, 78, 98, 99], position: 3 },
+      { subject: "Physical Sciences", assessments: [77, 75, 45, 79, 89], position: 2 },
+      { subject: "BET", assessments: [45, 56, 34, 89, 98], position: 45 },
+      { subject: "Computer Skills", assessments: [78, 75, 89, 75, 78], position: 9 },
     ],
     attendance: {
       firstHalf: [95, 100, 100, 76, 98],
       secondHalf: [23, 65, 45, 50, 100],
-    },
-    positions: {
-      inClass: 35,
     },
     leaderboard: [
         { position: 1, name: "Keketso Mtshiliba", mark: 99 },
@@ -36,8 +33,22 @@ const LearnerData = {
         { position: 16, name: "Thabang Mabunda", mark: 75 },
         { position: 17, name: "Sfiso Vusi Mthembu", mark: 72 },
         { position: 18, name: "Elton Lewane", mark: 68 },
-      ],
-  };
-  
-  export default LearnerData;
-  
+    ],
+
+    // Function to dynamically get positions from academics
+    getPositions() {
+      const positions = {};
+      this.academics.forEach(subject => {
+        const subjectKey = subject.subject.replace(/\s+/g, "_"); // Replace spaces with underscores
+        positions[subjectKey] = subject.position;
+      });
+      return positions;
+    },
+
+    // Retrieve the in-class position from the learner's main position
+    getInClassPosition() {
+      return this.position;
+    },
+};
+
+export default LearnerData;

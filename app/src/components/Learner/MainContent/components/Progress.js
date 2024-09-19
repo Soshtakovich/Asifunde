@@ -8,7 +8,11 @@ const calculateAverage = (arr) => {
 };
 
 const LearnerProgress = () => {
-  const { name, learnerNumber, grade, academics, attendance, positions, leaderboard } = LearnerData;
+  const { name, learnerNumber, grade, academics, attendance, leaderboard } = LearnerData;
+  
+  // Call the getPositions method to dynamically retrieve positions
+  const positions = LearnerData.getPositions();
+  const inClassPosition = LearnerData.getInClassPosition(); 
 
   return (
     <div className="progress-item-container">
@@ -57,14 +61,31 @@ const LearnerProgress = () => {
           </tbody>
         </table>
 
-        <h4 className="progress-item-header-section">Position</h4>
-        <ul className="progress-item-position-list">
-          {Object.keys(positions).map((subject, index) => (
-            <li className="progress-item-position-list-item" key={index}>
-              {subject}: {positions[subject]}
-            </li>
-          ))}
-        </ul>
+         <h4 className="progress-item-header-section">Position</h4>
+
+            <table className="progress-item-table">
+            <thead>
+                <tr>
+                <th>Subject</th>
+                <th>Position</th>
+                </tr>
+            </thead>
+            <tbody>
+                {Object.keys(positions).map((subject, index) => (
+                <tr key={index}>
+                    <td>{subject.replace(/_/g, " ")}</td>
+                    <td>{positions[subject]}</td>
+                </tr>
+                ))}
+                {/* Display in-class position */}
+                <tr>
+                <td>In Class Position</td>
+                <td>{inClassPosition}</td>
+                </tr>
+            </tbody>
+            </table>
+
+
       </div>
 
       {/* Right Section: Leaderboard */}

@@ -123,10 +123,15 @@
 
 
 /* Highlight the current learner's row */
+
 .progress-item-highlight-row {
-  background-color: #ffcccc !important; /* Light red background */
-  color: #b30000; /* Darker red text */
+  background: #33c317 !important; /* Light green background */
+  color: #b30000 !important; /* Darker red text */
+  font-size: 1.2em  !important; /* Adjust the size */
+  font-weight: bolder !important;
+  font-style: italic !important;
 }
+
 
 
 
@@ -142,4 +147,5 @@
     margin-bottom: 20px;
     flex-basis: 100%;
   }
+  
 }
