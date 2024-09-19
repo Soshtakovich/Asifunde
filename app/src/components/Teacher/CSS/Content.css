@@ -2,66 +2,110 @@
 @import url('Sidebar.css');
 
 .subject-content-container {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-}
-
-.topics-list {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  width: 95%;
-  background-color: var(--light);
-}
-
-.topic-item {
-  margin-bottom: 10px;
-  border-bottom: 1px solid #ddd; /* Add this line to separate each topic */
-  padding-bottom: 10px; /* Optional: space between topics and border */
-}
-
-.topic-item:last-child {
-  border-bottom: none; /* Remove the bottom border for the last topic */
-}
-
-.topic-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.topic-name {
-  font-weight: bold;
-  font-size: 1.2em;
-}
-
-.add-subtopic-btn {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.add-subtopic-btn:hover {
-  background-color: #45a049;
-}
-
-.subtopics-list {
-  margin-left: 20px;
-  margin-top: 10px;
-}
-
-.subtopic-item {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 8px;
-  margin-bottom: 5px;
-}
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .topics-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    width: 95%;
+    background-color: var(--light);
+  }
+  
+  .topic-item {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  .topic-item:last-child {
+    border-bottom: none;
+  }
+  
+  .topic-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .topic-name {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  
+  .add-topic-btn {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  
+  .add-topic-btn:hover {
+    background-color: #0069D9;
+  }
+  
+  .add-subtopic-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .add-subtopic-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .subtopics-list {
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+  
+  .subtopic-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 5px;
+  }
+  
+  .popup-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .popup-form label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .popup-form input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+  
+  .popup-form button {
+    padding: 8px 12px;
+    margin-right: 10px;
+  }
+  
