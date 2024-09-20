@@ -9,8 +9,8 @@ function Sidebar({ setContent, isSidebarClosed, toggleSidebar }) {
     { name: "Subjects", icon: "bxs-school" },
     { name: "Assessments", icon: "bx-analyse" },
     { name: "Progress", icon: "bx-run" },
+    { name: "Announcements", icon: "bxs-bell-ring" },
     //{ name: "Groups", icon: "bx-group" },
-   // { name: "Notifications", icon: "bxs-bell-ring" },
     //{ name: "Settings", icon: "bx-cog" }
   ];
 

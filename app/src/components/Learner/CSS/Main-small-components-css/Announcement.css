@@ -1,0 +1,71 @@
+@import url('../../CSS/variables.css');
+@import url('../../CSS/Sidebar.css');
+
+
+.subject-header {
+    background-color: #8bc34a;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    margin-bottom: 25px;
+    font-weight: bolder;
+    font-size: 15pt;
+    border-radius: 25px;
+  }
+  
+  .content {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 10px;
+    left: 0%;
+    width: 100%;
+  }
+  
+  .detail-box {
+    display: flex;
+    justify-content: space-between;
+  }
+
+
+  
+  .box {
+    padding: 10px;
+    width: 48%; /* Keep Date and Subject side by side */
+  }
+  
+  .info-box {
+    padding: 15px;
+    margin-top: 10px;
+
+  }
+  
+  .info-box p {
+    margin: 0;
+  }
+  
+  .subheadz {
+    font-weight: bold;
+    background-color:var(--dark);
+    color: var(--light);
+  }
+  
+  .announce-content {
+    margin-top: 5px;
+  }
+
+  .subheadz, .announce-content{
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--dark);
+  }
+
+  /* Add border between announcements */
+.announcement {
+    border-bottom: 10px solid var(--danger); /* Add a separator between announcements */
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.announcement:last-child {
+    border-bottom: none; /* Remove border from the last announcement */
+}

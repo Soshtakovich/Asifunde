@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard';
 import Subjects from './components/Subjects';
 import Assessments from './components/Assessments';
 import LearnerProgress from './components/Progress';
+import Announcements from './components/Announcements';
 
 function Maincontent({ content, isSidebarClosed }) {
 
@@ -21,8 +22,8 @@ function Maincontent({ content, isSidebarClosed }) {
                 return <LearnerProgress/>;
             case "Groups":
                 return <div>Groups Content</div>;
-            case "Notifications":
-                return <div>Notifications Content</div>;
+            case "Announcements":
+                return <Announcements/>;
             case "Settings":
                 return <div>Settings Content</div>;
             default:
