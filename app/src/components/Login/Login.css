@@ -1,21 +1,6 @@
-/* General styles */
 
+@import url('../Learner/CSS/variables.css');
 
-:root{
-     --background_colour :#e9f6fb;
-}
-
-
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: var(--background_colour);
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
   
   /* Login container */
   .login-container {
