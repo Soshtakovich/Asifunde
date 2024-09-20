@@ -1,15 +1,16 @@
 import React from 'react';
-import subjectData from './Dashdata'; // Import the data from Dashdata.js
+import subjectData from './Dashdata'; // Import subject data
 import '../../CSS/Main-small-components-css/Dash.css';
 
-function Dashboard() {
-
+function Dashboard({ onContentSelect }) { // Receiving the function to send data back
     return (
         <div className="dashboard-container">
-            {/* Menu list */}
             <ul className="subject-list">
                 {subjectData.map((subject, index) => (
-                    <li key={index} >
+                    <li 
+                        key={index} 
+                        onClick={() => onContentSelect(subject.link)} // Pass subject selection back to Maincontent
+                    >
                         <i className={subject.iconClass}></i>
                         <span className="subject-info">
                             <h3 className='subject-heading'>{subject.Name}</h3>
@@ -18,9 +19,6 @@ function Dashboard() {
                     </li>
                 ))}
             </ul>
-
-            {/* Render the selected content */}
-
         </div>
     );
 }
