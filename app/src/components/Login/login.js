@@ -14,6 +14,7 @@ const Login = ({ onLogin }) => {  // Receive onLogin as a prop
   return (
     <div className="login-container">
       <div className="login-box">
+      <h1 className="login-title_">Asifunde</h1>
         <h2 className="login-title">Account Login</h2>
         <form onSubmit={handleLogin}>
           <div className="input-group">
