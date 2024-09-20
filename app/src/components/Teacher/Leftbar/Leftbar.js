@@ -21,7 +21,7 @@ function Sidebar({ setContent, isSidebarClosed }) {
     return (
         <div className={`sidebar ${isSidebarClosed ? 'close' : ''}`}>
             <a href="/" className="logo">
-                <i className='bx bxs-shield'></i>
+                <i className='bx bxs-log-in-circle'></i>
                 <div className="logo-name"><span>Asi</span>Funde</div>
             </a>
             <ul className="side-menu">
@@ -36,7 +36,7 @@ function Sidebar({ setContent, isSidebarClosed }) {
             <ul className="side-menu">
                 <li>
                     <a href="/" className="logout">
-                        <i className='bx bx-log-out-circle'></i>
+                        <i className='bx bxs-log-out-circle'></i>
                         Logout
                     </a>
                 </li>
