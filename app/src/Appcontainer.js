@@ -1,23 +1,24 @@
-import React from 'react';
-import  './Appcontainer.css';
+import React, { useState, useEffect } from 'react';
+import './Appcontainer.css';
 import Teacher from './Teacher';
 import Learner from './Learner';
 
-//const userRole = 'Learner';
-const userRole = 'Teacher';
-
-//{userRole === 'Learner' ? <Learner /> : <Teacher />}
-
 function Container() {
-  return (
-    <>
-        <div className="container">
+  const [userRole, setUserRole] = useState('');
 
-        {userRole === 'Learner' ? <Learner /> : <Teacher />}
-            
-        </div>
-       
-    </>
+  useEffect(() => {
+    const role = window.prompt("Please enter your role (Teacher or Learner):");
+    if (role === 'Learner' || role === 'Teacher') {
+      setUserRole(role);
+    } else {
+      alert("Invalid role. Please refresh and enter either 'Teacher' or 'Learner'.");
+    }
+  }, []);
+
+  return (
+    <div className="container">
+      {userRole === 'Learner' ? <Learner /> : userRole === 'Teacher' ? <Teacher /> : <div>Please select a role.</div>}
+    </div>
   );
 }
 
