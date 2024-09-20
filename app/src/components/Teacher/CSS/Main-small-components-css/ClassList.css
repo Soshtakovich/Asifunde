@@ -1,0 +1,80 @@
+@import url('../../CSS/variables.css');
+@import url('../../CSS/Sidebar.css');
+
+.class-list-container {
+    padding: 20px;
+    background-color: #f1f1f1;
+    max-width: 1000px; /* Optional: limit width for better view */
+    margin: auto; /* Center the table */
+  }
+  
+  .class-list-table-container {
+    max-height: 400px; /* Set a max height to make it scrollable */
+    overflow-y: auto; /* Enable vertical scroll */
+    border: 1px solid #ddd; /* Add a border around the table container */
+  }
+  
+  .class-list-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .class-list-table th, .class-list-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .class-list-table th {
+    background-color: #4CAF50;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1; /* Ensure headers remain on top while scrolling */
+  }
+  
+  .details-btn {
+    background-color: #007BFF;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .details-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+    text-align: center;
+  }
+  
+  .close-btn {
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  .close-btn:hover {
+    background-color: darkred;
+  }
+  

@@ -4,6 +4,9 @@ import Path from './small-components/Path';
 import Dashboard from './components/Dashboard';
 import Assessments from './components/Assessments';
 import SubjectContent from '../SubjectTeacher/Content';
+import Announcement from '../SubjectTeacher/Announcements';
+import Displaysubmissions from './components/Submissions';
+import ClassList from '../SubjectTeacher/Classlist';
 
 
 function Maincontent({ content, isSidebarClosed }) {
@@ -12,19 +15,17 @@ function Maincontent({ content, isSidebarClosed }) {
     const renderContent = () => {
         switch (content) {
             case "Content":
-                return <SubjectContent/>
+                return <SubjectContent/>;
             case "Dashboard":
                 return <Dashboard />;
             case "Assessments":
                 return <Assessments/>;
-            case "Progress":
-                return <div>Notifications Content</div>;
-            case "Groups":
-                return <div>Groups Content</div>;
-            case "Notifications":
-                return <div>Notifications Content</div>;
-            case "Settings":
-                return <div>Settings Content</div>;
+            case "Submissions":
+                return <Displaysubmissions/>;
+            case "Announcements":
+                return <Announcement/>;
+            case "Class List":
+                return <ClassList/>;
             default:
                 return <div>No Content</div>; // Fallback content
         }
