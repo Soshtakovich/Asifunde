@@ -3,8 +3,7 @@
 
 .class-list-container {
     padding: 20px;
-    background-color: #f1f1f1;
-    max-width: 1000px; /* Optional: limit width for better view */
+    max-width: 100%; /* Adjusted for better view */
     margin: auto; /* Center the table */
   }
   
@@ -36,7 +35,7 @@
   .details-btn {
     background-color: #007BFF;
     color: white;
-    padding: 5px 10px;
+    padding: 5px 5px;
     border: none;
     cursor: pointer;
   }
@@ -55,15 +54,44 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 999; /* Ensures it stays on top of everything */
   }
   
   .popup-content {
-    background-color: white;
+    background-color: var(--light);
     padding: 20px;
     border-radius: 5px;
-    width: 300px;
+    width: 600px; /* Adjust size to fit content */
+    width: fit-content;
     text-align: center;
   }
+  
+  .popup-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .popup-content th, .popup-content td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+
+  .student-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 5px;
+    object-fit: cover;
+    margin-bottom: 15px;
+  }
+  
+  .student-picture {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
   
   .close-btn {
     background-color: red;
@@ -77,4 +105,5 @@
   .close-btn:hover {
     background-color: darkred;
   }
+  
   

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import '../CSS/Main-small-components-css/ClassList.css';
 
-
 const ClassList = () => {
   // Sample dynamic data for the class list
   const [students] = useState([
@@ -12,67 +11,16 @@ const ClassList = () => {
       position: 4,
       average: 83,
       attendance: 98,
+      assessments: [85, 67, 58, 77, 86, 90],
+      cell: '0787546323',
+      whatsapp: '0787546323',
+      age: 15,
+      address: '29 Rasetlong, Bekkersdal',
+      parentCell: '0726548253',
+      parentWhatsapp: '0635234568',
+      picture : 'https://wallpapers.com/images/hd/cool-profile-picture-paper-bag-head-4co57dtwk64fb7lv.jpg',
     },
-    {
-      learnerNumber: 'BET25-556268',
-      surname: 'Billa',
-      name: 'Geema',
-      position: 3,
-      average: 85,
-      attendance: 92,
-    },
-    // Add more students for testing scroll
-    {
-      learnerNumber: 'BET25-736239',
-      surname: 'Fede',
-      name: 'Kuye',
-      position: 5,
-      average: 79,
-      attendance: 100,
-    },
-    {
-      learnerNumber: 'BET25-536270',
-      surname: 'Zuko',
-      name: 'Zakwe',
-      position: 1,
-      average: 95,
-      attendance: 95,
-    },
-    {
-      learnerNumber: 'BET25-236371',
-      surname: 'Floyd',
-      name: 'Ndlovu',
-      position: 2,
-      average: 90,
-      attendance: 90,
-    },
-    // Add as many as necessary to exceed the scroll height
-
-    {
-        learnerNumber: 'BET25-556268',
-        surname: 'Billa',
-        name: 'Geema',
-        position: 3,
-        average: 85,
-        attendance: 92,
-      },
-      // Add more students for testing scroll
-      {
-        learnerNumber: 'BET25-736239',
-        surname: 'Fede',
-        name: 'Kuye',
-        position: 5,
-        average: 79,
-        attendance: 100,
-      },
-      {
-        learnerNumber: 'BET25-536270',
-        surname: 'Zuko',
-        name: 'Zakwe',
-        position: 1,
-        average: 95,
-        attendance: 95,
-      },
+    // Add more students here for testing scroll
   ]);
 
   const [showPopup, setShowPopup] = useState(false);
@@ -134,11 +82,67 @@ const ClassList = () => {
         <div className="popup-overlay">
           <div className="popup-content">
             <h2>{selectedStudent.name} {selectedStudent.surname} - Details</h2>
-            <p><strong>Learner Number:</strong> {selectedStudent.learnerNumber}</p>
-            <p><strong>Position in Class:</strong> {selectedStudent.position}</p>
-            <p><strong>Average:</strong> {selectedStudent.average}</p>
-            <p><strong>Attendance:</strong> {selectedStudent.attendance}</p>
-            <button className="close-btn" onClick={closePopup}>Close</button>
+
+            <div className="student-picture">
+                <img
+                    src={selectedStudent.picture}
+                    alt={`${selectedStudent.name} ${selectedStudent.surname}`}
+                    className="student-img"
+                />
+            </div>
+
+
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Assessment 1</th>
+                  <th>Assessment 2</th>
+                  <th>Assessment 3</th>
+                  <th>Assessment 4</th>
+                  <th>Assessment 5</th>
+                  <th>Assessment 6</th>
+                  <th>Average</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  {selectedStudent.assessments.map((score, i) => (
+                    <td key={i}>{score}</td>
+                  ))}
+                  <td>{selectedStudent.average}</td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <thead>
+                <tr>
+                  <th>Cell</th>
+                  <th>Whatsapp</th>
+                  <th>Age</th>
+                  <th>Address</th>
+                  <th>Parent Cell</th>
+                  <th>Parent Whatsapp</th>
+                  <th>Report</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{selectedStudent.cell}</td>
+                  <td>{selectedStudent.whatsapp}</td>
+                  <td>{selectedStudent.age}</td>
+                  <td>{selectedStudent.address}</td>
+                  <td>{selectedStudent.parentCell}</td>
+                  <td>{selectedStudent.parentWhatsapp}</td>
+                  <td>
+                    <button className="details-btn">Report Learner</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <button className="close-btn" onClick={closePopup}>
+              Close
+            </button>
           </div>
         </div>
       )}
