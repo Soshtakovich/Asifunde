@@ -9,7 +9,7 @@ function Path({ content }) {
                 <h1>{content}</h1>
                 
                 <ul className="breadcrumb">
-                    <li><a href="/">Asfunde</a></li>
+                    <li><a href="/">Asfunde / Learner</a></li>
 
                         <li><a href="/" className="active">{content}</a></li>
                     
