@@ -8,13 +8,13 @@ import Announcement from '../SubjectTeacher/Announcements';
 import Displaysubmissions from './components/Submissions';
 import ClassList from '../SubjectTeacher/Classlist';
 
-function Maincontent({ content, isSidebarClosed }) {
+function Maincontent({ content, isSidebarClosed, onContentSelect }) {
 
     // Define which component to render based on the content prop
     const renderContent = () => {
         switch (content) {
             case 'Dashboard':
-                return <Dashboard/>; // Placeholder or actual dashboard content
+                return <Dashboard onContentSelect={onContentSelect} />; // Pass the handler to Dashboard
             case 'Content':
                 return <SubjectContent />;
             case 'Assessments':
