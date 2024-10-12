@@ -1,0 +1,15 @@
+{
+  "Learner_Number": "BET25-456123",
+  "Name": "Zakes Samson Matsimbe",
+  "Gender": "Male",
+  "DOB": "2002-02-17T22:00:00.000Z",
+  "Age": 22,
+  "Contact": {
+    "Email": "zakessamson1@gmail.com",
+    "Cell": "0729039172",
+    "Whatsapp": "0604737475"
+  },
+  "Location": "Bekkersdal",
+  "Grade": "Grade 7",
+  "School": "Simunye Secondary School"
+}
