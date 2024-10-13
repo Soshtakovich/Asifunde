@@ -5,7 +5,7 @@ const db = require('../config/dbConfig');
 // Route to fetch learner's progress and assessment data
 router.get('/:learnerNumber', async (req, res) => {
     const learnerNumber = req.params.learnerNumber;
-    console.log('Learner_Number received:', learnerNumber); // Debugging log
+    //console.log('Learner_Number received:', learnerNumber); // Debugging log
 
     try {
         // Fetch Learner_ID using Learner_Number
@@ -15,7 +15,7 @@ router.get('/:learnerNumber', async (req, res) => {
             WHERE Learner_Number = ?
         `, [learnerNumber]);
 
-        console.log('Learner query result:', learner); // Debugging log
+        //console.log('Learner query result:', learner); // Debugging log
 
         // Check if the learner exists
         if (learner.length === 0) {
@@ -24,7 +24,7 @@ router.get('/:learnerNumber', async (req, res) => {
         }
 
         const learnerId = learner[0].Learner_ID;
-        console.log('Learner_ID:', learnerId); // Debugging log
+        //console.log('Learner_ID:', learnerId); // Debugging log
 
         // Fetch data from Learner_Progress table
         const [progress] = await db.query(`
@@ -33,7 +33,7 @@ router.get('/:learnerNumber', async (req, res) => {
             WHERE Learner_ID = ?
         `, [learnerId]);
 
-        console.log('Progress query result:', progress); // Debugging log
+       // console.log('Progress query result:', progress); // Debugging log
 
         // Fetch total number of assessments from Assessment_Marks table
         const [assessments] = await db.query(`
@@ -42,7 +42,7 @@ router.get('/:learnerNumber', async (req, res) => {
             WHERE Learner_ID = ?
         `, [learnerId]);
 
-        console.log('Assessments query result:', assessments); // Debugging log
+        //console.log('Assessments query result:', assessments); // Debugging log
 
         // Send data back to the frontend
         res.json({

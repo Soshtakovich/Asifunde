@@ -4,7 +4,7 @@ const db = require('../config/dbConfig');
 const fs = require('fs');
 
 router.post('/login', async (req, res) => {
-  console.log('Received Login Request:', req.body);
+  //console.log('Received Login Request:', req.body);
 
   const { username, password } = req.body;
   
@@ -19,7 +19,7 @@ router.post('/login', async (req, res) => {
       [username, password]
     );
 
-    console.log('Query Results:', results);
+    //console.log('Query Results:', results);
 
     if (results.length === 0) {
       console.warn('Invalid credentials');

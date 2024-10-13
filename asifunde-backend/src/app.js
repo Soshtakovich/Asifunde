@@ -29,10 +29,21 @@ app.use(
 );
 
 //Routes
+const db_change = require('./routes/db');
 const loginRouter = require('./routes/login');
 const dashRouter = require('./routes/dash');
+const dashassessRouter = require('./routes/dashassessments');
+const assessallRouter = require('./routes/assessmentsall');
+const progressRouter = require('./routes/learnerprogress');
+const learnerannouncementRouter = require('./routes/LearnerAnnouncements');
+
+app.use('/api', db_change);
 app.use('/api', loginRouter);
 app.use('/api/dash', dashRouter);
+app.use('/api/dashassessments', dashassessRouter);
+app.use('/api/assessmentsall', assessallRouter);
+app.use('/api/learnerprogress', progressRouter);
+app.use('/api/LearnerAnnouncements', learnerannouncementRouter);
 
 app.use((err, req, res, next) => {
   console.error('Error:', err);
