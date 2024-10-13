@@ -1,32 +1,16 @@
-START TRANSACTION;
 
--- Create Teacher Table
-CREATE TABLE Teacher (
-    Teacher_ID INT AUTO_INCREMENT PRIMARY KEY,
-    Teacher_Number VARCHAR(20) NOT NULL UNIQUE,  
-    Surname VARCHAR(50) NOT NULL,
-    Names VARCHAR(50) NOT NULL,
-    ID_Number VARCHAR(20) NOT NULL UNIQUE,
-    Gender ENUM('Male', 'Female', 'Other') NOT NULL,
-    DOB DATE NOT NULL,
-    Age INT NOT NULL,
-    Location VARCHAR(100),
-    Address VARCHAR(255),
-    Email VARCHAR(100) NOT NULL UNIQUE,
-    Cell_number VARCHAR(15),
-    Whatsapp_number VARCHAR(15),
-    Picture VARCHAR(255),
-    Username VARCHAR(50) NOT NULL UNIQUE,
-    Password VARCHAR(100) NOT NULL,
-    Grade VARCHAR(10),
-    Subject VARCHAR(100),
-    Bank_Name VARCHAR(20),
-    Branch_Code VARCHAR(10),
-    Account_Number VARCHAR(15),
-    Account_Type VARCHAR(50),
-    Tax_Reference_Number VARCHAR(15)
+UPDATE Subjects
+SET Subject_ID = 3
+WHERE Subject_ID = 11;
 
-);
-
-
-COMMIT;
+-- Step 2: Associate Teachers with Subjects
+INSERT INTO Teacher_Subjects (Teacher_ID, Subject_ID) VALUES
+(1, 1),  -- Teacher 1 teaches Mathematics (Subject 1)
+(2, 2),  -- Teacher 2 teaches Physical Sciences (Subject 2)
+(3, 1),  -- Teacher 3 teaches Mathematics (Subject 1)
+(4, 2),  -- Teacher 4 teaches Physical Sciences (Subject 2)
+(5, 1),  -- Teacher 5 teaches Mathematics (Subject 1)
+(6, 2),  -- Teacher 6 teaches Physical Sciences (Subject 2)
+(6, 1),  -- Teacher 6 also teaches Mathematics (Subject 1) in Grade 11
+(7, 3),  -- Teacher 7 teaches an additional subject (Subject 3)
+(7, 1);  -- Teacher 7 teaches Mathematics (Subject 1) in Grade 11

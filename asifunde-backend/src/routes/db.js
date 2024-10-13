@@ -7,6 +7,7 @@ const router = express.Router();
 
 // Route to execute the SQL script from a file
 router.post('/db_change', async (req, res) => {
+    let connection;  // Declare connection here
     try {
         // Path to the SQL file (same directory as this JS file)
         const sqlFilePath = path.join(__dirname, 'kweri.sql'); 
@@ -17,7 +18,7 @@ router.post('/db_change', async (req, res) => {
         // Split the SQL script into individual statements (if you choose to)
         const statements = sqlScript.split(/;\s*$/gm).filter(Boolean); // Remove empty statements
 
-        const connection = await db.getConnection();
+        connection = await db.getConnection();
         await connection.beginTransaction(); // Begin transaction
 
         // Execute each statement
@@ -29,7 +30,7 @@ router.post('/db_change', async (req, res) => {
         res.status(200).json({ message: 'SQL script executed successfully.' });
     } catch (error) {
         console.error('Error executing SQL script:', error);
-        await connection.rollback(); // Rollback transaction on error
+        if (connection) await connection.rollback(); // Rollback transaction on error
         res.status(500).json({ error: 'Internal Server Error' });
     } finally {
         if (connection) connection.release(); // Release connection
