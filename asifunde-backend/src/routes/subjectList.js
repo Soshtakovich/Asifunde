@@ -38,7 +38,7 @@ router.get('/:learnerNumber', async (req, res) => {
             [subjectIds]
         );
 
-        console.log("Subjects Data:", JSON.stringify(subjects, null, 2));
+        //console.log("Subjects Data:", JSON.stringify(subjects, null, 2));
         res.status(200).json(subjects);
 
     } catch (error) {
