@@ -1,3 +1,13 @@
-INSERT INTO Announcements (Subject_ID, Date, Content_Heading, Content) VALUES
-    (2, '2024-09-20', 'Upcoming Spring Classes', 'Please prepare for the upcoming spring classes on 2024-11-21.'),
-    (2, '2024-09-21', 'Life Sciences Experiment Reminder', 'Reminder to submit your lab reports by 2024-12-25.');
+START TRANSACTION;
+
+ALTER TABLE Subjects ADD COLUMN Icon VARCHAR(100);
+
+UPDATE Subjects
+SET Icon = CASE
+    WHEN Subject_ID = 1 THEN 'bx bx-math'
+    WHEN Subject_ID = 2 THEN 'bx bxl-sketch'
+    ELSE NULL
+END
+WHERE Subject_ID IN (1, 2);
+
+COMMIT;
