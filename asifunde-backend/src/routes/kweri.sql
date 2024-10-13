@@ -1,18 +1,32 @@
 START TRANSACTION;
 
--- Insert sample content
-INSERT INTO Content (Subject_ID, Title, Description) VALUES
-    (2, 'Electricity', 'Fundamentals of Electric Circuits'),
-    (2, 'Forces', 'Understanding Foreces');
+-- Create Teacher Table
+CREATE TABLE Teacher (
+    Teacher_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Teacher_Number VARCHAR(20) NOT NULL UNIQUE,  
+    Surname VARCHAR(50) NOT NULL,
+    Names VARCHAR(50) NOT NULL,
+    ID_Number VARCHAR(20) NOT NULL UNIQUE,
+    Gender ENUM('Male', 'Female', 'Other') NOT NULL,
+    DOB DATE NOT NULL,
+    Age INT NOT NULL,
+    Location VARCHAR(100),
+    Address VARCHAR(255),
+    Email VARCHAR(100) NOT NULL UNIQUE,
+    Cell_number VARCHAR(15),
+    Whatsapp_number VARCHAR(15),
+    Picture VARCHAR(255),
+    Username VARCHAR(50) NOT NULL UNIQUE,
+    Password VARCHAR(100) NOT NULL,
+    Grade VARCHAR(10),
+    Subject VARCHAR(100),
+    Bank_Name VARCHAR(20),
+    Branch_Code VARCHAR(10),
+    Account_Number VARCHAR(15),
+    Account_Type VARCHAR(50),
+    Tax_Reference_Number VARCHAR(15)
 
--- Insert sample sub-content with links
-INSERT INTO Sub_Content (Content_ID, Sub_Title, Description, Link) VALUES
-    (5, 'Force', 'Learn how to factor algebraic expressions.', 'path/to/factorise.pdf'),
-    (5, 'Gravity', 'Techniques for solving equations for x.', 'path/to/solve_for_x.pdf'),
-    (5, 'Friction', 'Methods for grouping algebraic terms.', 'path/to/grouping_terms.pdf'),
-    (6, 'Energy', 'Introduction to the concept of patterns.', 'path/to/pattern_concept.pdf'),
-    (6, 'Statics', 'Steps to find the rule of a pattern.', 'path/to/pattern_rule.pdf'),
-    (6, 'Dynamics', 'Deriving the general formula for patterns.', 'path/to/general_formula.pdf');
+);
 
 
 COMMIT;
