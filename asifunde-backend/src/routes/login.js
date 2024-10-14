@@ -4,64 +4,105 @@ const db = require('../config/dbConfig');
 const fs = require('fs');
 
 router.post('/login', async (req, res) => {
-  //console.log('Received Login Request:', req.body);
-
   const { username, password } = req.body;
-  
+
+  console.log('Login Request Received:', { username, password });
+
   if (!username || !password) {
     console.warn('Missing username or password');
     return res.status(400).json({ error: 'Username and password are required' });
   }
 
+  let user = null;
+  let role = null;
+
   try {
-    const [results] = await db.query(
+    // Check in Learner table first
+    const [learnerResults] = await db.query(
       'SELECT * FROM Learner WHERE Username = ? AND Password = ?',
       [username, password]
     );
 
-    //console.log('Query Results:', results);
+    if (learnerResults.length > 0) {
+      user = learnerResults[0];
+      role = user.Learner_Number.startsWith('BET') ? 'Learner' : 'Unknown';
+    } else {
+      // If not found, check in Teacher table
+      const [teacherResults] = await db.query(
+        `SELECT T.*, 
+                GROUP_CONCAT(DISTINCT G.Grade_Name) AS Grades, 
+                GROUP_CONCAT(DISTINCT S.Subject_Name) AS Subjects
+         FROM Teacher T
+         LEFT JOIN Teacher_Grades TG ON T.Teacher_ID = TG.Teacher_ID
+         LEFT JOIN Grades G ON TG.Grade_ID = G.Grade_ID
+         LEFT JOIN Teacher_Subjects TS ON T.Teacher_ID = TS.Teacher_ID
+         LEFT JOIN Subjects S ON TS.Subject_ID = S.Subject_ID
+         WHERE T.Username = ? AND T.Password = ?
+         GROUP BY T.Teacher_ID`,
+        [username, password]
+      );
 
-    if (results.length === 0) {
-      console.warn('Invalid credentials');
+      if (teacherResults.length > 0) {
+        user = teacherResults[0];
+        role = user.Teacher_Number.startsWith('TBET') ? 'Teacher' : 'Unknown';
+      }
+    }
+
+    if (!user || role === 'Unknown') {
+      console.warn('Invalid credentials:', { username, password });
       return res.status(401).json({ error: 'Invalid username or password' });
     }
 
-    const learner = results[0];
-    const role = learner.Learner_Number.startsWith('BET') ? 'Learner' : 'Teacher';
+    console.log(`Detected Role: ${role}`);
 
-    req.session.user = {
-      username: learner.Username,
-      learnerID: learner.Learner_ID,
-      role,
-    };
+    if (role === 'Learner') {
+      const learnerData = {
+        Learner_Number: user.Learner_Number,
+        Name: `${user.Names} ${user.Surname}`,
+        Gender: user.Gender,
+        DOB: user.DOB,
+        Age: user.Age,
+        Contact: {
+          Email: user.Email,
+          Cell: user.Cell_number,
+          Whatsapp: user.Whatsapp_number,
+        },
+        Location: user.Location,
+        Grade: user.Grade,
+        School: user.School,
+      };
 
-    const learnerData = {
-      Learner_Number: learner.Learner_Number,
-      Name: `${learner.Names} ${learner.Surname}`,
-      Gender: learner.Gender,
-      DOB: learner.DOB,
-      Age: learner.Age,
-      Contact: {
-        Email: learner.Email,
-        Cell: learner.Cell_number,
-        Whatsapp: learner.Whatsapp_number,
-      },
-      Location: learner.Location,
-      Grade: learner.Grade,
-      School: learner.School,
-    };
+      req.session.user = { username: user.Username, role };
+      fs.writeFile(
+        `./learnerData_${user.Username}.json`,
+        JSON.stringify(learnerData, null, 2),
+        (err) => {
+          if (err) {
+            console.error('Failed to save learner data:', err);
+            return res.status(500).json({ error: 'Failed to save learner data' });
+          }
+          res.json({ message: 'Login successful', user: learnerData, role });
+        }
+      );
+    } else if (role === 'Teacher') {
+      const teacherData = {
+        Teacher_Number: user.Teacher_Number,
+        Name: `${user.Names} ${user.Surname}`,
+        Gender: user.Gender,
+        DOB: user.DOB,
+        Age: user.Age,
+        Contact: {
+          Email: user.Email,
+          Cell: user.Cell_number,
+          Whatsapp: user.Whatsapp_number,
+        },
+        Grades: user.Grades ? user.Grades.split(',') : [],
+        Subjects: user.Subjects ? user.Subjects.split(',') : [],
+      };
 
-    const filePath = `./learnerData_${learner.Username}.json`;
-    fs.writeFile(filePath, JSON.stringify(learnerData, null, 2), (err) => {
-      if (err) {
-        console.error('File writing error:', err);
-        return res.status(500).json({ error: 'Failed to save learner data' });
-      }
-
-      console.log('File saved:', filePath);
-      res.json({ message: 'Login successful', user: learnerData, role });
-    });
-
+      req.session.user = { username: user.Username, role };
+      res.json({ message: 'Login successful', user: teacherData, role });
+    }
   } catch (err) {
     console.error('Database query error:', err);
     res.status(500).json({ error: 'Database query failed' });
