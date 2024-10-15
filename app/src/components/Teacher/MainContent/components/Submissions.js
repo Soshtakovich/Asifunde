@@ -53,7 +53,7 @@ function Submissions({ assessments }) {
 }
 
 function Displaysubmissions() {
-    const [showAssessmentPopup, setShowAssessmentPopup] = useState(false);
+    //const [showAssessmentPopup, setShowAssessmentPopup] = useState(false);
     const [assessments, setAssessments] = useState([]);
 
     useEffect(() => {
@@ -80,10 +80,10 @@ function Displaysubmissions() {
         fetchAssessments();
     }, []);
 
-    const addAssessment = async (assessmentData) => {
+   // const addAssessment = async (assessmentData) => {
         // Handle saving the assessment to your database here.
-        console.log("New assessment added:", assessmentData);
-    };
+       // console.log("New assessment added:", assessmentData);
+    //};
 
     return (
         <>
