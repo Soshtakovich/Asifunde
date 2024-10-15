@@ -28,7 +28,7 @@ app.use(
   })
 );
 
-//Routes
+// Learner Routes
 const db_change = require('./routes/db');
 const loginRouter = require('./routes/login');
 const dashRouter = require('./routes/dash');
@@ -48,6 +48,16 @@ app.use('/api/dashassessments', dashassessRouter);
 app.use('/api/assessmentsall', assessallRouter);
 app.use('/api/learnerprogress', progressRouter);
 app.use('/api/LearnerAnnouncements', learnerannouncementRouter);
+// Learner Routes
+
+
+
+// Teachr Routes
+const classlistRouter = require('./routes/Teacher/classlist');
+
+app.use('/api/classlist', classlistRouter);
+
+// Teachr Routes
 
 app.use((err, req, res, next) => {
   console.error('Error:', err);
