@@ -7,7 +7,7 @@ import '../../CSS/Main-small-components-css/Dash.css';
 
 function Subjects() {
     const [selectedSubject, setSelectedSubject] = useState(null);
-    const back_butt = "<< Back to Subjects";
+    const back_butt = "<< Back to Subjects List";
 
     const handleSubjectSelect = (subject) => {
         setSelectedSubject(subject); // Set the subject when selected

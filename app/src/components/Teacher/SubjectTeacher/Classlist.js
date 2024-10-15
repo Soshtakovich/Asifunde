@@ -1,97 +1,105 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../CSS/Main-small-components-css/ClassList.css';
 
 const ClassList = () => {
-  // Sample dynamic data for the class list
-  const [students] = useState([
-    {
-      learnerNumber: 'BET25-336267',
-      surname: 'Matsimbe',
-      name: 'Zakes',
-      position: 4,
-      average: 83,
-      attendance: 98,
-      assessments: [85, 67, 58, 77, 86, 90],
-      cell: '0787546323',
-      whatsapp: '0787546323',
-      age: 15,
-      address: '29 Rasetlong, Bekkersdal',
-      parentCell: '0726548253',
-      parentWhatsapp: '0635234568',
-      picture : 'https://wallpapers.com/images/hd/cool-profile-picture-paper-bag-head-4co57dtwk64fb7lv.jpg',
-    },
-    // Add more students here for testing scroll
-  ]);
-
+  const [learners, setLearners] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
-  const [selectedStudent, setSelectedStudent] = useState(null);
+  const [selectedLearner, setSelectedLearner] = useState(null);
 
-  // Function to handle showing the popup for each student
-  const handleMoreDetailsClick = (student) => {
-    setSelectedStudent(student);
+  useEffect(() => {
+    const fetchClassList = async () => {
+      try {
+        const teacherNumber = sessionStorage.getItem('Teacher_Number');
+
+        if (!teacherNumber) {
+          console.error('Teacher_Number not found in session storage');
+          return;
+        }
+
+        // Call API using teacherNumber in the URL path
+        const response = await fetch(`http://localhost:4000/api/classlist/${teacherNumber}`);
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch class list');
+        }
+
+        const data = await response.json();
+        setLearners(data);
+
+        // Save the total number of learners in session storage
+        sessionStorage.setItem('Total_Learners', data.length.toString());
+        
+      } catch (error) {
+        console.error('Error fetching class list:', error);
+      }
+    };
+
+    fetchClassList();
+  }, []);
+
+  // Function to handle showing the popup for each learner
+  const handleMoreDetailsClick = (learner) => {
+    setSelectedLearner(learner);
     setShowPopup(true);
   };
 
   // Function to close the popup
   const closePopup = () => {
     setShowPopup(false);
-    setSelectedStudent(null);
+    setSelectedLearner(null);
   };
 
   return (
     <div className="class-list-container">
       <h1>CLASS LIST</h1>
-      <div className="class-list-table-container">
-        <table className="class-list-table">
-          <thead>
-            <tr>
-              <th>Learner Number</th>
-              <th>Surname</th>
-              <th>Name</th>
-              <th>Position in Class</th>
-              <th>Average</th>
-              <th>Attendance</th>
-              <th>More Details</th>
+      <table className="class-list-table">
+        <thead>
+          <tr>
+            <th>Learner Number</th>
+            <th>Surname</th>
+            <th>Name</th>
+            <th>Average</th>
+            <th>Cell</th>
+            <th>Parent Cell</th>
+            <th>More Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          {learners.map((learner, index) => (
+            <tr key={index}>
+              <td>{learner.Learner_Number}</td>
+              <td>{learner.Surname}</td>
+              <td>{learner.Names}</td>
+              <td>{learner.average}</td>
+              <td>{learner.Cell_number}</td>
+              <td>{learner.Parent_Cell}</td>
+              <td>
+                <button
+                  className="details-btn"
+                  onClick={() => handleMoreDetailsClick(learner)}
+                >
+                  View More
+                </button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {students.map((student, index) => (
-              <tr key={index}>
-                <td>{student.learnerNumber}</td>
-                <td>{student.surname}</td>
-                <td>{student.name}</td>
-                <td>{student.position}</td>
-                <td>{student.average}</td>
-                <td>{student.attendance}</td>
-                <td>
-                  <button
-                    className="details-btn"
-                    onClick={() => handleMoreDetailsClick(student)}
-                  >
-                    VIEW MORE DETAILS
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
 
       {/* Popup for more details */}
-      {showPopup && selectedStudent && (
+      {showPopup && selectedLearner && (
         <div className="popup-overlay">
           <div className="popup-content">
-            <h2>{selectedStudent.name} {selectedStudent.surname} - Details</h2>
-
+            <h2>{selectedLearner.Names} {selectedLearner.Surname} - Details</h2>
+            
             <div className="student-picture">
                 <img
-                    src={selectedStudent.picture}
-                    alt={`${selectedStudent.name} ${selectedStudent.surname}`}
+                    src={selectedLearner.Picture}
+                    alt={`${selectedLearner.Names} ${selectedLearner.Surname}`}
                     className="student-img"
                 />
             </div>
-
-
+            
 
             <table>
               <thead>
@@ -107,18 +115,21 @@ const ClassList = () => {
               </thead>
               <tbody>
                 <tr>
-                  {selectedStudent.assessments.map((score, i) => (
-                    <td key={i}>{score}</td>
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <td key={i}>{selectedLearner.assessments && selectedLearner.assessments[i] !== undefined ? selectedLearner.assessments[i] : 'N/A'}</td>
                   ))}
-                  <td>{selectedStudent.average}</td>
+
+                  <td> <i>{selectedLearner.average}</i></td>
                 </tr>
               </tbody>
             </table>
+
+
             <table>
               <thead>
                 <tr>
                   <th>Cell</th>
-                  <th>Whatsapp</th>
+                  <th>Parent Cell</th>
                   <th>Age</th>
                   <th>Address</th>
                   <th>Parent Cell</th>
@@ -128,12 +139,12 @@ const ClassList = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td>{selectedStudent.cell}</td>
-                  <td>{selectedStudent.whatsapp}</td>
-                  <td>{selectedStudent.age}</td>
-                  <td>{selectedStudent.address}</td>
-                  <td>{selectedStudent.parentCell}</td>
-                  <td>{selectedStudent.parentWhatsapp}</td>
+                  <td>{selectedLearner.Cell_number}</td>
+                  <td>{selectedLearner.Whatsapp_number}</td>
+                  <td>{selectedLearner.Age}</td>
+                  <td>{selectedLearner.Address}</td>
+                  <td>{selectedLearner.Parent_Cell}</td>
+                  <td>{selectedLearner.Parent_Whatsapp}</td>
                   <td>
                     <button className="details-btn">Report Learner</button>
                   </td>

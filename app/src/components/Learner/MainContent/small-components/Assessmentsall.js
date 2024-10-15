@@ -1,5 +1,5 @@
-import React from "react";
-import '../../CSS/Main-small-components-css/Assessments.css'
+import React, { useEffect, useState } from "react";
+import '../../CSS/Main-small-components-css/Assessments.css';
 import { assessmentsData, resultsData } from "./assessmentsalldata";
 
 function Assessmentsall({ assessments, results }) {
@@ -34,7 +34,11 @@ function Assessmentsall({ assessments, results }) {
                                     </div>
                                 </td>
                                 <td>{assessment.dueDate}</td>
-                                <td><span className={`status-${assessment.status}`}>{assessment.status}</span></td>
+                                <td>
+                                    <span className={`status-${assessment.statusClass}`}>
+                                        {assessment.status}
+                                    </span>
+                                </td>
                                 <td><span className="days-remaining">{assessment.daysRemaining}</span></td>
                             </tr>
                         ))}
@@ -43,7 +47,9 @@ function Assessmentsall({ assessments, results }) {
             </div>
 
             {/* Results List */}
-            <div className="results-summary">
+          {/*
+           
+           <div className="results-summary">
                 <div className="header">
                     <i className='bx bx-note'></i>
                     <h3>Latest Results</h3>
@@ -64,14 +70,31 @@ function Assessmentsall({ assessments, results }) {
                     ))}
                 </ul>
             </div>
+          
+          */}  
         </div>
     );
 }
 
 function Displayassessments() {
-    return (
-        <Assessmentsall assessments={assessmentsData} results={resultsData} />
-    );
+    const [assessments, setAssessments] = useState([]); // Store assessments data
+    const [loading, setLoading] = useState(true); // Track loading state
+
+    useEffect(() => {
+        const fetchAssessments = async () => {
+            const data = await assessmentsData(); // Await fetched data
+            setAssessments(data); // Update state with the fetched data
+            setLoading(false); // Set loading to false once data is fetched
+        };
+
+        fetchAssessments(); // Call fetch function
+    }, []);
+
+    if (loading) {
+        return <p>Loading assessments...</p>; // Show loading message
+    }
+
+    return <Assessmentsall assessments={assessments} results={resultsData} />;
 }
 
 export default Displayassessments;

@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../../CSS/Main-small-components-css/Subjectassessments.css';
 import AddAssessmentPopup from "../../../SubjectTeacher/Addassessment";
-import { subjectassessmentsData } from "./assessmentspagedata";
 
 function Assessmentspage({ assessments }) {
-    
     const calculateDaysRemaining = (dueDate) => {
         const currentDate = new Date();
         const dueDateObj = new Date(dueDate);
         const differenceInTime = dueDateObj - currentDate;
         const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
-
         return differenceInDays >= 0 ? differenceInDays : 'Overdue';
     };
 
@@ -26,11 +23,9 @@ function Assessmentspage({ assessments }) {
                             <th>Name</th>
                             <th>Description</th>
                             <th>File</th>
-                            
                             <th>Total Mark</th>
                             <th>Due Date</th>
                             <th>Days Remaining</th>
-                      
                             <th>Submissions</th>
                             <th>Not Submitted</th>
                         </tr>
@@ -39,6 +34,8 @@ function Assessmentspage({ assessments }) {
                         {assessments.map((assessment, index) => {
                             const daysRemaining = calculateDaysRemaining(assessment.dueDate);
                             const isOverdue = daysRemaining === 'Overdue';
+                            const total_Learners = sessionStorage.getItem('Total_Learners');
+                            const submitted = assessment.submissions;
 
                             return (
                                 <tr key={index}>
@@ -49,7 +46,7 @@ function Assessmentspage({ assessments }) {
                                     <td>{assessment.dueDate}</td>
                                     <td><span className={`days-remaining ${isOverdue ? 'overdue' : ''}`}>{daysRemaining}</span></td>
                                     <td>{assessment.submissions}</td>
-                                    <td>{assessment.not_submit}</td>
+                                    <td>{total_Learners-submitted}</td>
                                 </tr>
                             );
                         })}
@@ -62,31 +59,53 @@ function Assessmentspage({ assessments }) {
 
 function Displaysubjectassessmentpage() {
     const [showAssessmentPopup, setShowAssessmentPopup] = useState(false);
-  
-    // Function to handle adding the assessment
+    const [assessments, setAssessments] = useState([]);
+
+    useEffect(() => {
+        const fetchAssessments = async () => {
+            const teacherNumber = sessionStorage.getItem('Teacher_Number');
+
+            if (!teacherNumber) {
+                console.error('Teacher_Number not found in session storage');
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:4000/api/assessments/${teacherNumber}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch assessments');
+                }
+                const data = await response.json();
+                setAssessments(data);
+            } catch (error) {
+                console.error('Error fetching assessments:', error);
+            }
+        };
+
+        fetchAssessments();
+    }, []);
+
     const addAssessment = async (assessmentData) => {
-      // You can handle saving the assessment to your database here.
-      console.log("New assessment added:", assessmentData);
-      // After saving.
+        // Handle saving the assessment to your database here.
+        console.log("New assessment added:", assessmentData);
     };
-  
+
     return (
-      <>
-        <button className="add-topic-btn" onClick={() => setShowAssessmentPopup(true)}>
-          + Add Assessment
-        </button>
-  
-        {/* Show the AddAssessmentPopup when the button is clicked */}
-        {showAssessmentPopup && (
-          <AddAssessmentPopup
-            setShowAssessmentPopup={setShowAssessmentPopup}
-            addAssessment={addAssessment}
-          />
-        )}
-  
-        <Assessmentspage assessments={subjectassessmentsData} />
-      </>
+        <>
+            <button className="add-topic-btn" onClick={() => setShowAssessmentPopup(true)}>
+                + Add Assessment
+            </button>
+
+            {showAssessmentPopup && (
+                <AddAssessmentPopup
+                    setShowAssessmentPopup={setShowAssessmentPopup}
+                    addAssessment={addAssessment}
+                />
+            )}
+
+            <Assessmentspage assessments={assessments} />
+        </>
     );
-  }
-  
-  export default Displaysubjectassessmentpage;
+}
+
+export default Displaysubjectassessmentpage;

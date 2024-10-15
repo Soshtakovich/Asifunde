@@ -9,18 +9,8 @@ function App() {
 
   // Function to handle login and authenticate the user
   const handleLogin = (username, password) => {
-    if ((username === 'Zex' && password === 'abcd1234') || (username === 'TZex' && password === 'abcd1234')) {
-      setIsAuthenticated(true); // User is authenticated
-
-      // Set role based on username
-      if (username === 'Zex') {
-        setUserRole('Learner');
-      } else if (username === 'TZex') {
-        setUserRole('Teacher');
-      }
-    } else {
-      alert("Login failed! Please check your credentials.");
-    }
+    // Call the login API or your database logic here
+    // You may want to move the login logic here instead of inside Login component
   };
 
   return (
@@ -28,7 +18,11 @@ function App() {
       <header className="App-header">
         {/* Conditionally render the Login component or Container based on authentication */}
         {!isAuthenticated ? (
-          <Login onLogin={handleLogin} />
+          <Login 
+            onLogin={handleLogin} 
+            setIsAuthenticated={setIsAuthenticated} 
+            setUserRole={setUserRole}
+          />
         ) : (
           <Container userRole={userRole} />  
         )}

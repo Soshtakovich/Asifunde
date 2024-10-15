@@ -1,48 +1,26 @@
 
-export const subjectassessmentsData = [
-    {
-        subject: "Mathematics",
-        description: "Algebra and Geometry test",
-        fileLink: "/files/mathematics-test.pdf",
-        dueDate: "2024-11-15",
-        totalMark: 100,
-        mark: 85,
-        status: "Completed"
-    },
-    {
-        subject: "Physical Sciences",
-        description: "Physics and Chemistry exam",
-        fileLink: "/files/physics-test.pdf",
-        dueDate: "2024-09-20",
-        totalMark: 100,
-        mark: 75,
-        status: "Not Started"
-    },
-    {
-        subject: "English",
-        description: "Essay writing assignment",
-        fileLink: "/files/english-assignment.pdf",
-        dueDate: "2023-09-25",
-        totalMark: 50,
-        mark: 35,
-        status: "Incomplete"
-    },
-    {
-        subject: "Computer Skills",
-        description: "Introduction to HTML",
-        fileLink: "/files/computer-skills.pdf",
-        dueDate: "2023-09-18",
-        totalMark: 60,
-        mark: 50,
-        status: "Completed"
-    },
-    {
-        subject: "BET",
-        description: "Introduction to Business Management",
-        fileLink: "/files/bet-assignment.pdf",
-        dueDate: "2024-11-15",
-        totalMark: 80,
-        mark: 65,
-        status: "Incomplete"
+//export const subjectassessmentsData
+
+
+export const subjectassessmentsData = async () => {
+    const learnerNumber = sessionStorage.getItem('Learner_Number'); // Get learner number from session storage
+
+    try {
+        const response = await fetch(`http://localhost:4000/api/assessmentsall/${learnerNumber}`);
+        
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error(`Failed to fetch assessments: ${errorText}`);
+            throw new Error(errorText);
+        }
+
+        const data = await response.json();
+        console.log('Fetched Subject Assessments Data:', data); // Log fetched data
+        return data;
+    } catch (error) {
+        console.error('Error fetching subject assessments:', error);
+        return []; // Return empty array if fetch fails
     }
-];
+};
+
+

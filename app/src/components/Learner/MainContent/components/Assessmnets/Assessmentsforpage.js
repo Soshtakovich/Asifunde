@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import '../../../CSS/Main-small-components-css/Subjectassessments.css';
 import { subjectassessmentsData } from "./assessmentspagedata";
 
@@ -8,13 +8,11 @@ function Assessmentspage({ assessments }) {
         const dueDateObj = new Date(dueDate);
         const differenceInTime = dueDateObj - currentDate;
         const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
-
         return differenceInDays >= 0 ? differenceInDays : 'Overdue';
     };
 
     return (
         <div className="modern-assessment-container">
-            {/* Assessments Table */}
             <div className="modern-assessments-table">
                 <div className="modern-header">
                     <i className='bx bx-receipt'></i>
@@ -27,7 +25,7 @@ function Assessmentspage({ assessments }) {
                 <table>
                     <thead>
                         <tr>
-                            <th>Subject</th>
+                            <th>Name</th>
                             <th>Description</th>
                             <th>File Link</th>
                             <th>Due Date</th>
@@ -44,7 +42,7 @@ function Assessmentspage({ assessments }) {
 
                             return (
                                 <tr key={index}>
-                                    <td>{assessment.subject}</td>
+                                    <td>{assessment.name}</td>
                                     <td>{assessment.description}</td>
                                     <td><a href={assessment.fileLink} className="download-link">Download</a></td>
                                     <td>{assessment.dueDate}</td>
@@ -71,7 +69,21 @@ function Assessmentspage({ assessments }) {
 }
 
 function Displaysubjectassessmentpage() {
-    return <Assessmentspage assessments={subjectassessmentsData} />;
+    const [assessments, setAssessments] = useState([]); // State to store assessments data
+    const [loading, setLoading] = useState(true); // Loading state
+
+    useEffect(() => {
+        const fetchAssessments = async () => {
+            const data = await subjectassessmentsData(); // Fetch data
+            setAssessments(data); // Set fetched data in state
+            setLoading(false); // Stop loading
+        };
+        fetchAssessments();
+    }, []);
+
+    if (loading) return <p>Loading assessments...</p>; // Display loading state
+
+    return <Assessmentspage assessments={assessments} />;
 }
 
 export default Displaysubjectassessmentpage;

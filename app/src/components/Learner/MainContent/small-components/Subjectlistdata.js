@@ -1,33 +1,5 @@
-//import React, { useState } from 'react';
-import React from 'react';
-
-
-const subjectData = [
-    {
-        iconClass: 'bx bx-math',
-        Name: 'Mathematics',
-        label: 'Absent',
-        link: '/' // The link is now used to trigger the modal
-    },
-    {
-        iconClass: 'bx bxl-sketch',
-        Name: 'Physical Sciences',
-        label: 'Assessments completed',
-        link: '/'
-    },
-    {
-        iconClass: 'bx bxs-doughnut-chart',
-        Name: 'BET',
-        label: 'Average',
-        link: '/'
-    },
-    {
-        iconClass: 'bx bx-laptop',
-        Name: 'Computer Skills',
-        label: 'Program Score',
-        link: '/'
-    }
-];
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function SubjectList({ subjectData, onSubjectClick }) {
     return (
@@ -37,7 +9,7 @@ function SubjectList({ subjectData, onSubjectClick }) {
                     <li key={index} onClick={() => onSubjectClick(subject)}>
                         <i className={subject.iconClass}></i>
                         <span className="subject-info">
-                            <h3 className='subject-heading'>{subject.Name}</h3>
+                            <h3 className="subject-heading">{subject.Name}</h3>
                         </span>
                     </li>
                 ))}
@@ -47,6 +19,21 @@ function SubjectList({ subjectData, onSubjectClick }) {
 }
 
 function Subjectslistdata({ onSubjectSelect }) {
+    const [subjectData, setSubjectData] = useState([]);
+
+    useEffect(() => {
+        const learnerNumber = sessionStorage.getItem('Learner_Number'); // Get learner number from session storage
+
+        axios
+            .get(`http://localhost:4000/api/subjectList/${learnerNumber}`)
+            .then((response) => {
+                setSubjectData(response.data);
+            })
+            .catch((error) => {
+                console.error('Error fetching subjects:', error);
+            });
+    }, []);
+
     return (
         <div>
             <SubjectList subjectData={subjectData} onSubjectClick={onSubjectSelect} />
