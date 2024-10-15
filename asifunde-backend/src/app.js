@@ -54,8 +54,10 @@ app.use('/api/LearnerAnnouncements', learnerannouncementRouter);
 
 // Teachr Routes
 const classlistRouter = require('./routes/Teacher/classlist');
+const assessmentsRouter = require('./routes/Teacher/assessments');
 
 app.use('/api/classlist', classlistRouter);
+app.use('/api/assessments', assessmentsRouter);
 
 // Teachr Routes
 

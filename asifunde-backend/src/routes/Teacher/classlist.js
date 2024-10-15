@@ -7,14 +7,14 @@ router.get('/:teacherNumber', async (req, res) => {
   try {
     // Step 1: Retrieve Teacher_Number from the request params
     const teacherNumber = req.params.teacherNumber;
-    console.log('Teacher_Number:', teacherNumber);
+    //console.log('Teacher_Number:', teacherNumber);
 
     // Step 2: Fetch Teacher_ID using Teacher_Number
     const [teacher] = await db.query(
       'SELECT Teacher_ID FROM Teacher WHERE Teacher_Number = ?',
       [teacherNumber]
     );
-    console.log('Teacher Query Result:', teacher);
+    //console.log('Teacher Query Result:', teacher);
 
     if (!teacher || teacher.length === 0) {
       return res.status(404).json({ error: 'Teacher not found' });
@@ -33,14 +33,14 @@ router.get('/:teacherNumber', async (req, res) => {
       'SELECT Subject_ID FROM Teacher_Subjects WHERE Teacher_ID = ?',
       [teacherID]
     );
-    console.log('Subjects Query Result:', subjects);
+    //console.log('Subjects Query Result:', subjects);
 
     // Extract grade and subject IDs into arrays
     const gradeIDs = grades.map((g) => g.Grade_ID);
     const subjectIDs = subjects.map((s) => s.Subject_ID);
 
-    console.log('Grade IDs:', gradeIDs);
-    console.log('Subject IDs:', subjectIDs);
+    //console.log('Grade IDs:', gradeIDs);
+    //console.log('Subject IDs:', subjectIDs);
 
     // Handle empty arrays to avoid SQL errors
     if (gradeIDs.length === 0 || subjectIDs.length === 0) {
@@ -52,7 +52,7 @@ router.get('/:teacherNumber', async (req, res) => {
       `SELECT Grade_Name FROM Grades WHERE Grade_ID IN (?)`,
       [gradeIDs]
     );
-    console.log('Grade Names Query Result:', gradeNames);
+    //console.log('Grade Names Query Result:', gradeNames);
 
     const gradeNamesList = gradeNames.map((g) => g.Grade_Name);
 
@@ -64,7 +64,7 @@ router.get('/:teacherNumber', async (req, res) => {
        WHERE L.Grade IN (?)`,
       [gradeNamesList]  // Use the grade names for the query
     );
-    console.log('Learners Query Result:', learners);
+    //console.log('Learners Query Result:', learners);
 
     if (learners.length === 0) {
       return res.status(200).json({ message: 'No learners found for the specified grades.' });
@@ -80,7 +80,7 @@ router.get('/:teacherNumber', async (req, res) => {
            WHERE AM.Learner_ID = ? AND A.Subject_ID IN (?)`,
           [learner.Learner_ID, subjectIDs]
         );
-        console.log(`Assessments for Learner ${learner.Learner_ID}:`, assessments);
+        //console.log(`Assessments for Learner ${learner.Learner_ID}:`, assessments);
 
         const totalMarks = assessments.reduce((sum, a) => sum + a.Mark, 0);
         const average = assessments.length > 0 ? totalMarks / assessments.length : 0;
@@ -93,11 +93,11 @@ router.get('/:teacherNumber', async (req, res) => {
       })
     );
 
-    console.log('Final Learner Data:', learnerData);
+    //console.log('Final Learner Data:', learnerData);
     res.json(learnerData);
 
   } catch (error) {
-    console.error('Error fetching class list:', error);
+    //console.error('Error fetching class list:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
