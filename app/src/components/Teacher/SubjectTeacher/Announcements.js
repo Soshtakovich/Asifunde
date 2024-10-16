@@ -80,11 +80,14 @@ const fetchAnnouncements = async (teacherNum) => {
         setTopics((prevTopics) => [...prevTopics, newTopicData]);
         setShowTopicPopup(false);
         setNewAnnouncement({ heading: "", message: "" });
+        alert('Announcement added successfully!'); // Alert on success
       } else {
         console.error('Failed to add the announcement');
+        alert('Failed to add announcement. Please try again.');
       }
     } catch (error) {
       console.error('Error adding announcement:', error);
+      alert('An error occurred while adding the announcement.');
     }
   };
 
