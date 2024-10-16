@@ -1,132 +1,156 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../CSS/Content.css';
-import Announcementpop from './Addannouncement';// Import the new component
 
 const Announcement = () => {
-  const [topics, setTopics] = useState([
-    {
-      name: "Test 3",
-      subtopics: [
-        { name: "Test date changed to 5 April 2024", content: null, worksheet: null },
-      ],
-      isOpen: false,
-    },
-    {
-      name: "Classes",
-      subtopics: [
-        { name: "Science Monday", content: null, worksheet: null },
-        { name: "Maths Sunday", content: null, worksheet: null },
-      ],
-      isOpen: false,
-    },
-  ]);
+  const [topics, setTopics] = useState([]); // Announcements from backend
+  const [showTopicPopup, setShowTopicPopup] = useState(false); // Popup state
+  const [newAnnouncement, setNewAnnouncement] = useState({ heading: "", message: "" });
+  const [teacherNumber, setTeacherNumber] = useState("");
 
-  const [showTopicPopup, setShowTopicPopup] = useState(false);
-  const [newTopic, setNewTopic] = useState({ name: "", subtopic: "", content: null, worksheet: null });
+  // Fetch Teacher_Number from sessionStorage and announcements on mount
+  useEffect(() => {
+    const storedTeacherNumber = sessionStorage.getItem('Teacher_Number');
+    if (storedTeacherNumber) {
+      setTeacherNumber(storedTeacherNumber);
+      fetchAnnouncements(storedTeacherNumber);
+    } else {
+      console.error("No Teacher_Number found in sessionStorage");
+    }
+  }, []);
 
-  const [showSubtopicPopup, setShowSubtopicPopup] = useState(false);
-  const [selectedTopicIndex, setSelectedTopicIndex] = useState(null);
-  const [newSubtopic, setNewSubtopic] = useState({ name: "", content: null, worksheet: null });
+  // Fetch announcements from backend
+// Fetch announcements from backend
+const fetchAnnouncements = async (teacherNum) => {
+  try {
+    const response = await fetch(`http://localhost:4000/api/announcements/${teacherNum}`);
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data); // Keep this to check the fetched data
 
-  // Function to toggle the dropdown for a topic
+      // Transform the fetched data into the format you need
+      const formattedData = data.map(announcement => ({
+        name: announcement.heading, // Use heading for the topic name
+        subtopics: [{ name: announcement.message }], // Use message for the subtopic
+        isOpen: false, // Initialize the isOpen property
+      }));
+
+      setTopics(formattedData); // Set the transformed data to state
+    } else {
+      console.error("Failed to fetch announcements");
+    }
+  } catch (error) {
+    console.error("Error fetching announcements:", error);
+  }
+};
+
+  
+
+  // Toggle a topic's open/closed state
   const toggleTopic = (index) => {
-    setTopics(
-      topics.map((topic, i) =>
+    setTopics((prevTopics) =>
+      prevTopics.map((topic, i) =>
         i === index ? { ...topic, isOpen: !topic.isOpen } : topic
       )
     );
   };
 
-  // Function to add a new topic
-  const addNewTopic = (e) => {
+  // Handle adding a new announcement
+  const addNewAnnouncement = async (e) => {
     e.preventDefault();
-    const newTopicData = {
-      name: newTopic.name,
-      subtopics: [{ name: newTopic.subtopic, content: newTopic.content, worksheet: newTopic.worksheet }],
-      isOpen: false,
+    const data = {
+      teacherNumber,
+      contentHeading: newAnnouncement.heading,
+      content: newAnnouncement.message,
     };
-    setTopics([...topics, newTopicData]);
-    setShowTopicPopup(false); // Close the popup after adding
-  };
 
-  // Function to add a new subtopic to a topic (untouched as requested)
-  const addNewSubtopic = (e) => {
-    e.preventDefault();
-    const updatedTopics = [...topics];
-    updatedTopics[selectedTopicIndex].subtopics.push({ name: newSubtopic.name, content: newSubtopic.content, worksheet: newSubtopic.worksheet });
-    setTopics(updatedTopics);
-    setShowSubtopicPopup(false); // Close the popup after adding
+    try {
+      const response = await fetch('http://localhost:4000/api/announcements', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        const savedAnnouncement = await response.json();
+        const newTopicData = {
+          name: savedAnnouncement.contentHeading,
+          subtopics: [{ name: savedAnnouncement.content }],
+          isOpen: false,
+        };
+        setTopics((prevTopics) => [...prevTopics, newTopicData]);
+        setShowTopicPopup(false);
+        setNewAnnouncement({ heading: "", message: "" });
+      } else {
+        console.error('Failed to add the announcement');
+      }
+    } catch (error) {
+      console.error('Error adding announcement:', error);
+    }
   };
 
   return (
     <div className="subject-content-container">
-      {/* Add Topic Button */}
-      <button className="add-topic-btn" onClick={() => setShowTopicPopup(true)}>+ Add an Announcement</button>
+      {/* Add Announcement Button */}
+      <button className="add-topic-btn" onClick={() => setShowTopicPopup(true)}>
+        + Add an Announcement
+      </button>
 
-      {/* Add Topic Popup */}
+      {/* Announcement Popup */}
       {showTopicPopup && (
-        <Announcementpop newTopic={newTopic} setNewTopic={setNewTopic} addNewTopic={addNewTopic}  setShowTopicPopup={setShowTopicPopup}/>
-      )}
-
-      {/* Topic List */}
-      <div className="topics-list">
-        {topics.map((topic, index) => (
-          <div key={index} className="topic-item">
-            <div className="topic-header">
-              <span className="topic-name" onClick={() => toggleTopic(index)}>
-                {topic.name}
-              </span>
-              <button
-                className="add-subtopic-btn"
-                onClick={() => {
-                  setSelectedTopicIndex(index);
-                  setShowSubtopicPopup(true);
-                }}
-              >
-                + Sub Announcement
-              </button>
-            </div>
-            {topic.isOpen && (
-              <div className="subtopics-list">
-                {topic.subtopics.map((subtopic, subIndex) => (
-                  <div key={subIndex} className="subtopic-item">
-                    {subtopic.name}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-
-      {/* Add Subtopic Popup (left untouched as requested) */}
-      {showSubtopicPopup && (
         <div className="popup-form">
-          <form onSubmit={addNewSubtopic}>
+          <form onSubmit={addNewAnnouncement}>
             <label>
-              Sub Announcement Name:
+              Announcement Title:
               <input
                 type="text"
-                value={newSubtopic.name}
-                onChange={(e) => setNewSubtopic({ ...newSubtopic, name: e.target.value })}
+                value={newAnnouncement.heading}
+                onChange={(e) =>
+                  setNewAnnouncement({ ...newAnnouncement, heading: e.target.value })
+                }
                 required
               />
             </label>
             <label>
-              Sub Announcement Content:
+              Announcement Message:
               <input
-                type="text-area"
-                value={newSubtopic.content}
-                onChange={(e) => setNewSubtopic({ ...newSubtopic, content: e.target.value })}
+                type="text"
+                value={newAnnouncement.message}
+                onChange={(e) =>
+                  setNewAnnouncement({ ...newAnnouncement, message: e.target.value })
+                }
                 required
               />
             </label>
-
-            <button type="submit">Add Subtopic</button>
-            <button type="button" onClick={() => setShowSubtopicPopup(false)}>Cancel</button>
+            <button type="submit">Add Announcement</button>
+            <button type="button" onClick={() => setShowTopicPopup(false)}>
+              Cancel
+            </button>
           </form>
         </div>
       )}
+
+                  {/* List of Topics and Subtopics */}
+                  <div className="topics-list">
+              {topics.map((topic, index) => (
+                <div key={index} className="topic-item">
+                  <div className="topic-header">
+                    <span className="topic-name" onClick={() => toggleTopic(index)}>
+                      {topic.name}
+                    </span>
+                  </div>
+                  {topic.isOpen && (
+                    <div className="subtopics-list">
+                      {topic.subtopics.map((subtopic, subIndex) => (
+                        <div key={subIndex} className="subtopic-item">
+                          {subtopic.name}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
     </div>
   );
 };

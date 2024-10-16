@@ -6,7 +6,7 @@ const Announcementpop = ({ newTopic, setNewTopic, addNewTopic, setShowTopicPopup
     <div className="popup-form">
       <form onSubmit={addNewTopic}>
         <label>
-          Topic Name:
+          Announcemnet Title:
           <input
             type="text"
             value={newTopic.name}
@@ -15,7 +15,7 @@ const Announcementpop = ({ newTopic, setNewTopic, addNewTopic, setShowTopicPopup
           />
         </label>
         <label>
-          Subtopic Name:
+          Announcemnt Meassage:
           <input
             type="text"
             value={newTopic.subtopic}
@@ -23,21 +23,8 @@ const Announcementpop = ({ newTopic, setNewTopic, addNewTopic, setShowTopicPopup
             required
           />
         </label>
-        <label>
-          Upload Notes:
-          <input
-            type="file"
-            onChange={(e) => setNewTopic({ ...newTopic, notes: e.target.files[0] })}
-          />
-        </label>
-        <label>
-          Upload Worksheet:
-          <input
-            type="file"
-            onChange={(e) => setNewTopic({ ...newTopic, worksheet: e.target.files[0] })}
-          />
-        </label>
-        <button type="submit">Add Topic</button>
+
+        <button type="submit">Add Announcement</button>
         <button type="button" onClick={() => setShowTopicPopup(false)}>Cancel</button>
       </form>
     </div>
