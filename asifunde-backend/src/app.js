@@ -52,14 +52,18 @@ app.use('/api/LearnerAnnouncements', learnerannouncementRouter);
 
 
 
-// Teachr Routes
+// Teacher Routes
 const classlistRouter = require('./routes/Teacher/classlist');
 const assessmentsRouter = require('./routes/Teacher/assessments');
+const announcementsRouter = require('./routes/Teacher/announcements');
+
+
 
 app.use('/api/classlist', classlistRouter);
 app.use('/api/assessments', assessmentsRouter);
+app.use('/api/announcements', announcementsRouter);
 
-// Teachr Routes
+// Teacher Routes
 
 app.use((err, req, res, next) => {
   console.error('Error:', err);
