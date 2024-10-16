@@ -56,6 +56,8 @@ const assessmentsRouter = require('./routes/Teacher/assessments');
 const announcementsRouter = require('./routes/Teacher/announcements');
 const addAssessRouter = require('./routes/Teacher/addassessments');
 const contentRouter = require('./routes/Teacher/content');
+const subtopicRouter = require('./routes/Teacher/addSubtopic');
+const addContentRouter = require('./routes/Teacher/addContent');
 
 
 
@@ -64,7 +66,8 @@ app.use('/api/assessments', assessmentsRouter);
 app.use('/api/announcements', announcementsRouter);
 app.use('/api/addassessments', addAssessRouter);
 app.use('/api/content', contentRouter);
-
+app.use('/api/addSubtopic', subtopicRouter);
+app.use('/api/addContent',addContentRouter);
 // Teacher Routes
 
 app.use((err, req, res, next) => {

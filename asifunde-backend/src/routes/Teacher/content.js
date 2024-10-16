@@ -55,7 +55,7 @@ router.get('/:teacherNumber', async (req, res) => {
             // If content already exists, push to sub_content array
             if (!acc[Content_ID]) {
                 acc[Content_ID] = {
-                    Content_ID,
+                    Content_ID, // Include Content_ID in the response
                     Title,
                     Description,
                     Sub_Content: []
@@ -84,4 +84,4 @@ router.get('/:teacherNumber', async (req, res) => {
     }
 });
 
-module.exports = router;
+module.exports = router; 
