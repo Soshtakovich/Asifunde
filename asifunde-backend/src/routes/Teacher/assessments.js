@@ -52,7 +52,7 @@ router.get('/:teacherNumber', async (req, res) => {
         );
 
         // Debugging: Log the raw assessments data
-        console.log('Raw assessments data:', assessmentsResults);
+       // console.log('Raw assessments data:', assessmentsResults);
 
         // Check if assessments exist
         if (assessmentsResults.length === 0) {

@@ -50,18 +50,20 @@ app.use('/api/learnerprogress', progressRouter);
 app.use('/api/LearnerAnnouncements', learnerannouncementRouter);
 // Learner Routes
 
-
-
 // Teacher Routes
 const classlistRouter = require('./routes/Teacher/classlist');
 const assessmentsRouter = require('./routes/Teacher/assessments');
 const announcementsRouter = require('./routes/Teacher/announcements');
+const addAssessRouter = require('./routes/Teacher/addassessments');
+const contentRouter = require('./routes/Teacher/content');
 
 
 
 app.use('/api/classlist', classlistRouter);
 app.use('/api/assessments', assessmentsRouter);
 app.use('/api/announcements', announcementsRouter);
+app.use('/api/addassessments', addAssessRouter);
+app.use('/api/content', contentRouter);
 
 // Teacher Routes
 
