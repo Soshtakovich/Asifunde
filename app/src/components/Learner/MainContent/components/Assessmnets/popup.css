@@ -1,0 +1,20 @@
+.popup-form {
+    position:absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-form form {
+    background-color: inherit;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    height: 350px;
+    text-align: center;
+}
+
+.popup-form button {
+    margin: 10px;
+}
