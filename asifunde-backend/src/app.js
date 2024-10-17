@@ -38,6 +38,7 @@ const dashassessRouter = require('./routes/dashassessments');
 const assessallRouter = require('./routes/assessmentsall');
 const progressRouter = require('./routes/learnerprogress');
 const learnerannouncementRouter = require('./routes/LearnerAnnouncements');
+const submitassessmentRouter = require('./routes/submitassessment');
 
 app.use('/api', db_change);
 app.use('/api', loginRouter);
@@ -48,6 +49,7 @@ app.use('/api/dashassessments', dashassessRouter);
 app.use('/api/assessmentsall', assessallRouter);
 app.use('/api/learnerprogress', progressRouter);
 app.use('/api/LearnerAnnouncements', learnerannouncementRouter);
+app.use('/api/submitassessment', submitassessmentRouter);
 // Learner Routes
 
 // Teacher Routes

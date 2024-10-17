@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require('../config/dbConfig');
 
 // Route to get all assessments for a specific learner based on Learner_Number
+// Route to get all assessments for a specific learner based on Learner_Number
 router.get('/:learnerNumber', async (req, res) => {
     const learnerNumber = req.params.learnerNumber;
 
@@ -58,6 +59,7 @@ router.get('/:learnerNumber', async (req, res) => {
                 const mark = markRecord.length > 0 ? markRecord[0].Mark : 'Not Marked';
 
                 return {
+                    Assessment_ID: assessment.Assessment_ID,  // Include Assessment_ID
                     name: assessment.Name,
                     description: assessment.Description,
                     fileLink: assessment.File_Link,
@@ -75,5 +77,7 @@ router.get('/:learnerNumber', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+
 
 module.exports = router;
