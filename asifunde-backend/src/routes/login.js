@@ -1,15 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../config/dbConfig');
+const bcrypt = require('bcrypt');
 const fs = require('fs');
 
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
-  console.log('Login Request Received:', { username, password });
-
   if (!username || !password) {
-    console.warn('Missing username or password');
     return res.status(400).json({ error: 'Username and password are required' });
   }
 
@@ -19,8 +17,8 @@ router.post('/login', async (req, res) => {
   try {
     // Check in Learner table first
     const [learnerResults] = await db.query(
-      'SELECT * FROM Learner WHERE Username = ? AND Password = ?',
-      [username, password]
+      'SELECT * FROM Learner WHERE Username = ?',
+      [username]
     );
 
     if (learnerResults.length > 0) {
@@ -37,9 +35,9 @@ router.post('/login', async (req, res) => {
          LEFT JOIN Grades G ON TG.Grade_ID = G.Grade_ID
          LEFT JOIN Teacher_Subjects TS ON T.Teacher_ID = TS.Teacher_ID
          LEFT JOIN Subjects S ON TS.Subject_ID = S.Subject_ID
-         WHERE T.Username = ? AND T.Password = ?
+         WHERE T.Username = ?
          GROUP BY T.Teacher_ID`,
-        [username, password]
+        [username]
       );
 
       if (teacherResults.length > 0) {
@@ -49,12 +47,17 @@ router.post('/login', async (req, res) => {
     }
 
     if (!user || role === 'Unknown') {
-      console.warn('Invalid credentials:', { username, password });
       return res.status(401).json({ error: 'Invalid username or password' });
     }
 
-    console.log(`Detected Role: ${role}`);
+    // Verify the password using bcrypt
+    const isMatch = await bcrypt.compare(password, user.Password);
 
+    if (!isMatch) {
+      return res.status(401).json({ error: 'Invalid username or password' });
+    }
+
+    // Handle role-based login logic
     if (role === 'Learner') {
       const learnerData = {
         Learner_Number: user.Learner_Number,
@@ -78,7 +81,6 @@ router.post('/login', async (req, res) => {
         JSON.stringify(learnerData, null, 2),
         (err) => {
           if (err) {
-            console.error('Failed to save learner data:', err);
             return res.status(500).json({ error: 'Failed to save learner data' });
           }
           res.json({ message: 'Login successful', user: learnerData, role });
