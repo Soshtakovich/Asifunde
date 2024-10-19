@@ -5,10 +5,10 @@ The Asifunde Application is an education management platform that provides tools
 
 ## 📂 Directory Structure
 
-Asifunde-online-applications/
-README.md
-asifunde-backend/
-asifunde-frontend/
+- **Asifunde-online-applications/
+- **README.md
+- **asifunde-backend/
+- **asifunde-frontend/
 
 
 1. Asifunde-online-applications/
@@ -17,6 +17,7 @@ This directory handles the learner application process. It includes:
 Application Form: Where learners apply for various grades (e.g., Grades 10, 11, 12).
 PHP Scripts: For processing applications, sending acknowledgment and offer emails to learners, and handling the creation of learner accounts upon acceptance.
 Database Connections: It connects to the asifunde_applications database, stores application details, and later interacts with the main database (asifunde_db) during the enrollment phase.
+
 ## Key Functionalities:
 Learner Application: Learners can submit their application for review.
 Offer Management: Emails are sent to learners offering them a spot, which they can accept or decline.
@@ -26,7 +27,7 @@ Enrollment Process: Once the offer is accepted, learner details are moved to the
 This file provides an overview and explanation of the directory structure and functionality of the Asifunde app. It guides users on how to get started and understand the different components of the project.
 
 3. asifunde-backend/
-This directory contains the Node.js backend of the application. It manages the server-side logic for:
+This directory contains the **Node.js backend** of the application. It manages the server-side logic for:
 
 ## Session Management: Handles user authentication and session tracking based on Learner_Number for logged-in learners.
 Data Processing: Processes and manages data for learners, teachers, and administrators. It connects to the asifunde_db for storing and retrieving course materials, assessments, and user progress.
