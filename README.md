@@ -5,10 +5,10 @@ The Asifunde Application is an education management platform that provides tools
 
 ## 📂 Directory Structure
 
-- **Asifunde-online-applications/
-- **README.md
-- **asifunde-backend/
-- **asifunde-frontend/
+- Asifunde-online-applications/
+- README.md
+- asifunde-backend/
+- asifunde-frontend/
 
 
 1. Asifunde-online-applications/
