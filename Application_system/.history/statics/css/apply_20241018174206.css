@@ -1,0 +1,68 @@
+/* Base Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.form-container {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  width: 100%;
+}
+
+/* Form Layout */
+form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
+  gap:15px; /* Space between grid items */
+}
+
+/* Full-width inputs */
+input[type="date"],
+input[type="password"],
+input[type="email"],
+button {
+  grid-column: span 2; /* Make these elements span both columns */
+}
+
+/* Style for input fields */
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%; /* Ensure the input takes full space of its container */
+  box-sizing: border-box; /* Prevent padding from overflowing */
+}
+
+.input-group input{
+    margin-top: 15px;
+}
+
+/* Button Styling */
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  width: 100%; /* Full width */
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  form {
+      grid-template-columns: 1fr; /* Single column on smaller screens */
+  }
+}
