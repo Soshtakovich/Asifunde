@@ -75,8 +75,9 @@ To handle applications, ensure that the Asifunde-online-applications/ directory 
 
 
 ## 📊 Database
-**Application Database:** asifunde_applications - stores learner application data.
-**Main Database:** asifunde_db - stores learner, teacher, and admin data, along with courses and assessments
+- **Application Database:** *asifunde_applications* - stores learner application data.
+
+- **Main Database:** *asifunde_db* - stores learner, teacher, and admin data, along with courses and assessments
 
 
 ## 👨‍🏫 Project Maintainers
