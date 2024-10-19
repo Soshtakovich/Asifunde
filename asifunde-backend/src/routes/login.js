@@ -11,6 +11,8 @@ router.post('/login', async (req, res) => {
     return res.status(400).json({ error: 'Username and password are required' });
   }
 
+  console.log(`Attempting login for username: ${username}`);
+
   let user = null;
   let role = null;
 
@@ -24,8 +26,9 @@ router.post('/login', async (req, res) => {
     if (learnerResults.length > 0) {
       user = learnerResults[0];
       role = user.Learner_Number.startsWith('BET') ? 'Learner' : 'Unknown';
+      console.log(`Found learner with role: ${role}`);
     } else {
-      // If not found, check in Teacher table
+      // Check in Teacher table if learner not found
       const [teacherResults] = await db.query(
         `SELECT T.*, 
                 GROUP_CONCAT(DISTINCT G.Grade_Name) AS Grades, 
@@ -43,21 +46,32 @@ router.post('/login', async (req, res) => {
       if (teacherResults.length > 0) {
         user = teacherResults[0];
         role = user.Teacher_Number.startsWith('TBET') ? 'Teacher' : 'Unknown';
+        console.log(`Found teacher with role: ${role}`);
       }
     }
 
     if (!user || role === 'Unknown') {
+      console.log('Invalid username or role unknown');
       return res.status(401).json({ error: 'Invalid username or password' });
     }
 
-    // Verify the password using bcrypt
-    const isMatch = await bcrypt.compare(password, user.Password);
+    // Handle $2y$ to $2b$ prefix replacement for PHP bcrypt compatibility
+    let storedHash = user.Password;
+    if (storedHash.startsWith('$2y$')) {
+      storedHash = storedHash.replace('$2y$', '$2b$');
+    }
+
+    console.log(`Comparing passwords for user: ${user.Username}`);
+    const isMatch = await bcrypt.compare(password, storedHash);
 
     if (!isMatch) {
+      console.log('Password does not match');
       return res.status(401).json({ error: 'Invalid username or password' });
     }
 
-    // Handle role-based login logic
+    console.log(`Login successful for role: ${role}`);
+
+    // Handle login logic for learner or teacher
     if (role === 'Learner') {
       const learnerData = {
         Learner_Number: user.Learner_Number,
