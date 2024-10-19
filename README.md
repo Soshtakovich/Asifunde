@@ -32,7 +32,7 @@ This directory contains the **Node.js backend** of the application. It manages t
 
 **Session Management: Handles user authentication and session tracking based on Learner_Number for logged-in learners.**
 Data Processing: Processes and manages data for learners, teachers, and administrators. It connects to the asifunde_db for storing and retrieving course materials, assessments, and user progress.
-# APIs: Provides APIs for frontend communication, managing user data, assessments, and announcements.**
+**APIs: Provides APIs for frontend communication, managing user data, assessments, and announcements.**
 ## Key Features:
 User Authentication: Ensures only authorized users can access the platform.
 Course & Assessment Management: Teachers can create courses, assign assessments, and track learner progress.
@@ -54,18 +54,20 @@ This directory hosts the React-based frontend of the application, offering the u
 # 🚀 How to Run
 
 ## Backend
-Navigate to the asifunde-backend/ directory:
-cd asifunde-backend
-npm install
-npm start
+- Navigate to the asifunde-backend/ directory:
+- cd asifunde-backend
+- npm install
+- npm start
+
 This starts the Node.js backend server, ensuring that all the required packages are installed and the backend is running on the specified port.
 
 ## Frontend
 
-Navigate to the asifunde-frontend/ directory:
-cd asifunde-frontend
-npm install
-npm start
+- Navigate to the asifunde-frontend/ directory:
+- cd asifunde-frontend
+- npm install
+- npm start
+
 This will launch the React frontend. The frontend communicates with the backend through the provided APIs to manage user data and display relevant information.
 
 ## Applications
@@ -73,8 +75,8 @@ To handle applications, ensure that the Asifunde-online-applications/ directory 
 
 
 ## 📊 Database
-### Application Database: asifunde_applications - stores learner application data.
-### Main Database: asifunde_db - stores learner, teacher, and admin data, along with courses and assessments
+**Application Database:** asifunde_applications - stores learner application data.
+**Main Database:** asifunde_db - stores learner, teacher, and admin data, along with courses and assessments
 
 
 ## 👨‍🏫 Project Maintainers
