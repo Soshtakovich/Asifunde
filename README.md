@@ -3,7 +3,7 @@
 ## Overview
 The Asifunde Application is an education management platform that provides tools for learners, teachers, and administrators to manage academic resources and assessments efficiently. The project is divided into frontend and backend parts, with a separate directory for handling learner applications.
 
-## Directory Structure
+## 📂 Directory Structure
 
 Asifunde-online-applications/
 README.md
@@ -48,7 +48,7 @@ Real-time Interaction: Users can see announcements, submit homework, and receive
 ## UI Components: Dynamic forms, dashboards, progress charts, and file uploads for assessments.
 
 
-# How to Run
+# 🚀 How to Run
 
 ## Backend
 Navigate to the asifunde-backend/ directory:
@@ -70,8 +70,8 @@ To handle applications, ensure that the Asifunde-online-applications/ directory 
 
 
 ## 📊 Database
-###Application Database: asifunde_applications - stores learner application data.
-###Main Database: asifunde_db - stores learner, teacher, and admin data, along with courses and assessments
+### Application Database: asifunde_applications - stores learner application data.
+### Main Database: asifunde_db - stores learner, teacher, and admin data, along with courses and assessments
 
 
 ## 👨‍🏫 Project Maintainers
