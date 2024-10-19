@@ -71,7 +71,7 @@ const Login = ({ setIsAuthenticated, setUserRole }) => {
           </button>
         </form>
         <div className="login-links">
-          <a href="/">Forgot <span>Username / Password?</span></a>
+          <a href="https://zakesmatsimbe.net.za/Application_system/statics/php/forgot_password.php">Forgot <span>Password?</span></a>
         </div>
       </div>
     </div>
