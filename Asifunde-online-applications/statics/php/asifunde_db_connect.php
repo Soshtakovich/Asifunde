@@ -1,9 +1,9 @@
 <?php
 
-$host = "sql17.cpt2.host-h.net";
+$host = "***************************";
 $db_name = "asifunde_db";
-$user = "asifunde";
-$password = "Asifundezakes2024";
+$user = "*************************";
+$password = "**************************";
 
 // Create a connection
 $asifunde_conn = new mysqli($host, $user, $password, $db_name);
