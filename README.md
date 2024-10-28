@@ -1,14 +1,14 @@
 # Asifunde Application
 
 ## Overview
-    The Asifunde Application is an education management platform that provides tools for learners, teachers, and administrators to manage academic resources and assessments efficiently. The project is divided into frontend and backend parts, with a separate directory for handling learner applications.
+The Asifunde Application is an education management platform that provides tools for learners, teachers, and administrators to manage academic resources and assessments efficiently. The project is divided into frontend and backend parts, with a separate directory for handling learner applications.
 
 ## 📂 Directory Structure
 
-    - Asifunde-online-applications/
-    - README.md
-    - asifunde-backend/
-    - asifunde-frontend/
+- Asifunde-online-applications/
+- README.md
+- asifunde-backend/
+- asifunde-frontend/
 
 ## 📂 Directory contents breakdown
 
